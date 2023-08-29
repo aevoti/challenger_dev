@@ -1,15 +1,17 @@
 
 # Task - Prática
 
-Olá candidato,
+Olá! 👋
+Primeiramente, parabéns por ter chegado até aqui! Essa tem sido uma jornada seletiva de altíssimo nível, você se destacou na Etapa de Cadastro e não temos dúvidas de que irá brilhar neste desafio!
+E como funcionará a Task Prática?
+ 
+Dividimos em duas etapas, para que você possa aplicar seus conhecimentos e práticas, em cada uma das frentes de desenvolvimento.
+O desafio consiste em uma pequena implementação para avaliarmos seu conhecimento em Back-End (.NET, C#) e Front-End (HTML5, CSS, JavaScript e Angular)
 
-Primeiramente, parabéns por ter chegado até aqui! Essa tem sido uma jornada seletiva de altíssimo nível, mas você brilhou em cada etapa e não temos dúvidas de que fará isso mais uma vez! <br>
+Para realizá-lo, você deverá dar um fork neste repositório e depois cloná-lo em alguma pasta de sua preferência, na máquina que estiver realizando o teste.
+Crie um branch com seu nome a partir da master e, quando finalizar todo o desenvolvimento, você deverá enviar um pull-request com sua versão.
 
-Esse desafio consiste em uma pequena implementação para avaliarmos seu conhecimento em back-end (.NET, C#) e Front-End (HTML5, CSS, JavaScript e Angular)
-
-Para realizá-lo, você deverá dar um fork neste repositório e depois cloná-lo em alguma pasta de sua preferencia, na máquina que estiver realizando o teste.
-
-Crie um branch com seu nome a partir da master e, quando finalizar todo o desenvolvimento, você deverá enviar um pull-request com sua versão.<br>
+Caso precisse consultar algum material, recomendo para o back https://www.macoratti.net/19/10/ang7_apinc1.htm e https://www.youtube.com/@loianegroner para o front
 
 # O Desafio
 ## Back-End/.NET
@@ -17,7 +19,7 @@ A primeira etapa será o desenvolvimento back-end!
 
 Descrição:
 
-O Objetivo dessa etapa é criar apis para um fórum onde um usuário pode fazer o CRUD básico de um tópico e realizar comentários dentro desse tópico, como uma discussão. A parte referente aos usuários não precisa ser implementado, podendo mockar os dados no front ou no back de acordo com a preferencia do candidato, sugerimos utilizar a seguinte estrutura para usuários:
+O Objetivo dessa etapa é criar apis para um fórum onde um usuário pode fazer o CRUD básico de um tópico e realizar comentários dentro desse tópico, como uma discussão. A parte referente aos usuários não precisa ser implementado, podendo mockar os dados no front ou no back de acordo com a sua preferencia, sugerimos utilizar a seguinte estrutura para usuários:
 
     {
 	    Id: int;
