@@ -11,9 +11,9 @@ O desafio consiste em uma pequena implementação para avaliarmos seu conhecimen
 Para realizá-lo, você deverá dar um fork neste repositório e depois cloná-lo em alguma pasta de sua preferência, na máquina que estiver realizando o teste.
 Crie um branch com seu nome a partir da master e, quando finalizar todo o desenvolvimento, você deverá enviar um pull-request com sua versão.
 
-Caso precise consultar algum material de apoio, recomendamos:
-Para o back: https://www.macoratti.net/19/10/ang7_apinc1.htm
-Para o front: https://www.youtube.com/@loianegroner 
+Caso precise consultar algum material de apoio, recomendamos:<br>
+Para o back: https://www.macoratti.net/19/10/ang7_apinc1.htm<br>
+Para o front: https://www.youtube.com/@loianegroner <br>
 
 # O Desafio
 ## Back-End/.NET
