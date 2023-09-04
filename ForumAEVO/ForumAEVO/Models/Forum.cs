@@ -14,5 +14,10 @@ namespace ForumAEVO.Models
         [MaxLength(2000)]
         [Column("Mensagem")]
         public string Msg { get; set; } = string.Empty;
+
+        [Required]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Data")]
+        public DateTime Data { get; set; } = DateTime.Now.Date;
     }
 }

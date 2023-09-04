@@ -20,34 +20,7 @@ namespace ForumAEVO.Controllers
             _context = context;
         }
 
-        // GET: api/Topicos
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<TopicoDto>>> GetTopicos()
-        {
-            var topicos = await _context.Topicos
-                .Include(t => t.Usuario)
-                .Include(t => t.Comentarios)
-                .ToListAsync();
-
-            var topicosDto = topicos.Select(t => new TopicoDto
-            {
-                UserId = t.UserId,
-                Comentarios = t.Comentarios.Select(c => new ComentarioDto
-                {
-                    UserId = c.UserId,
-                    Id = c.Id,
-                    Msg = c.Msg,
-                    TopicoId = c.TopicoId
-                }).ToList(),
-                Id = t.Id,
-                Msg = t.Msg
-            }).ToList();
-
-            return Ok(topicosDto);
-        }
-
-
-        // GET: api/Topicos/5 DEPOIS tratar se o Id nao existir
+        // GET: api/topicos/5 DEPOIS tratar se o Id nao existir
         [HttpGet("{id}")]
         public async Task<ActionResult<Topico>> GetTopico(Guid id)
         {
@@ -66,7 +39,7 @@ namespace ForumAEVO.Controllers
         }
 
 
-        // POST: api/Topicos
+        // POST: api/topicos
         [HttpPost]
         public async Task<ActionResult<Topico>> PostTopico([FromBody] Topico topico)
         {
@@ -76,8 +49,9 @@ namespace ForumAEVO.Controllers
             }
 
             topico.Id = Guid.NewGuid();
+            topico.Data = DateTime.Now.Date; // informando apenas a data no formato dd/mm/aaaa
 
-            // Incliu o usuário associado ao tópico
+            // Inclui o usuário associado ao tópico
             topico.Usuario = await _context.Usuarios.FindAsync(topico.UserId);
 
             _context.Topicos.Add(topico);
@@ -86,7 +60,7 @@ namespace ForumAEVO.Controllers
             return CreatedAtAction("GetTopico", new { id = topico.Id }, topico);
         }
 
-        // PUT: api/Topicos/5
+        // PUT: api/topicos/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTopico(Guid id, [FromBody] MsgUpdateDTO topicoMsgUpdateDTO)
         {
@@ -125,7 +99,7 @@ namespace ForumAEVO.Controllers
         }
 
 
-        // DELETE: api/Topicos/5
+        // DELETE: api/topicos/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTopico(Guid id)
         {

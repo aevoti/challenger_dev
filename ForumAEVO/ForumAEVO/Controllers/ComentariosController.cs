@@ -31,7 +31,8 @@ namespace ForumAEVO.Controllers
                 TopicoId = comentario.TopicoId,
                 UserId = comentario.UserId,
                 Id = comentario.Id,
-                Msg = comentario.Msg
+                Msg = comentario.Msg,
+                Data = comentario.Data
             }).ToList();
 
             return Ok(comentariosDto);
@@ -48,6 +49,7 @@ namespace ForumAEVO.Controllers
             }
 
             comentario.Id = Guid.NewGuid();
+            comentario.Data = DateTime.Now.Date; // Define a data atual sem a hora
 
             _context.Comentarios.Add(comentario);
             await _context.SaveChangesAsync();
@@ -97,6 +99,7 @@ namespace ForumAEVO.Controllers
         public async Task<IActionResult> DeleteComentario(Guid idTopico, Guid id)
         {
             var comentario = await _context.Comentarios.FindAsync(id);
+            
             if (comentario == null)
             {
                 return NotFound(new { message = "Comentário não encontrado." });
