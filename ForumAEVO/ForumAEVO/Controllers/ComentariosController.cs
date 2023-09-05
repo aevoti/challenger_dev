@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ForumAEVO.Models;
 using ForumAEVO.Models.DTOs;
+
 
 namespace ForumAEVO.Controllers
 {
@@ -15,29 +12,11 @@ namespace ForumAEVO.Controllers
     {
         private readonly Context _context;
 
+
         public ComentariosController(Context context)
         {
             _context = context;
         }
-
-        //GET: api/comentarios
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<ComentarioDto>>> GetComentarios()
-        {
-            var comentarios = await _context.Comentarios.ToListAsync();
-
-            var comentariosDto = comentarios.Select(comentario => new ComentarioDto
-            {
-                TopicoId = comentario.TopicoId,
-                UserId = comentario.UserId,
-                Id = comentario.Id,
-                Msg = comentario.Msg,
-                Data = comentario.Data
-            }).ToList();
-
-            return Ok(comentariosDto);
-        }
-
 
         // POST: api/comentarios
         [HttpPost]
@@ -57,20 +36,29 @@ namespace ForumAEVO.Controllers
             return CreatedAtAction("GetComentario", new { id = comentario.Id }, comentario);
         }
 
-        // PUT: api/comentarios/{idTopico}/{id}
+        //PUT: api/comentarios/{idTopico}/{id}
         [HttpPut("{idTopico}/{id}")]
         public async Task<IActionResult> PutComentario(Guid idTopico, Guid id, [FromBody] ComentarioDto comentarioDto)
         {
+            var userId = GetAndValidateToken();
+            var topico = await _context.Topicos.FindAsync(idTopico);
+            if (topico == null)
+            {
+               return NotFound("IdTopico não encontrado.");
+            }
+
+
+            // Busca se o usuário "autenticado" é dono do comentário
             var comentario = await _context.Comentarios
-                .Include(c => c.Usuario) 
-                .FirstOrDefaultAsync(c => c.Id == id && c.TopicoId == idTopico);
+                .Include(c => c.Usuario)
+                .FirstOrDefaultAsync(c => c.Id == id && c.TopicoId == idTopico && c.UserId == userId);
 
             if (comentario == null)
             {
-                return NotFound();
+                return Unauthorized("Você não tem permissão para editar este comentário.");
             }
 
-            // Atualizando apenas o campo mensagem quem vem do JSON
+            // Atualiza o comentário
             comentario.Msg = comentarioDto.Msg;
 
             try
@@ -89,17 +77,32 @@ namespace ForumAEVO.Controllers
                 }
             }
 
-            return Ok(comentarioDto);
+            return Ok();
         }
-
-
 
         // DELETE: api/comentarios/{idTopico}/{id}
         [HttpDelete("{idTopico}/{id}")]
         public async Task<IActionResult> DeleteComentario(Guid idTopico, Guid id)
         {
-            var comentario = await _context.Comentarios.FindAsync(id);
+            var userId = GetAndValidateToken();
+
+            var topico = await _context.Topicos.FindAsync(idTopico);
+            var donoComentario = await _context.Comentarios.FindAsync(id);
+
+            if (topico == null || donoComentario==null)
+            {
+                return NotFound(new { message = "Topico Ou Coméntario não encontrado." });
+            }
             
+            if(donoComentario.UserId != userId)
+            {
+                return Unauthorized("Você não tem permissão para excluir este comentário.");
+            }
+
+            // Busca se o usuário "autenticado" é dono do comentário
+            var comentario = await _context.Comentarios
+                .FirstOrDefaultAsync(c => c.Id == id && c.TopicoId == idTopico && c.UserId == userId);
+
             if (comentario == null)
             {
                 return NotFound(new { message = "Comentário não encontrado." });
@@ -110,11 +113,26 @@ namespace ForumAEVO.Controllers
 
             return NoContent();
         }
-
-
         private bool ComentarioExists(Guid id)
         {
             return _context.Comentarios.Any(e => e.Id == id);
         }
+
+        //Função para verificar o Token fake do Header
+        private Guid GetAndValidateToken()
+        {
+            // Acessa o Token do cabeçalho da solicitação, o fakeToken é o Id da classe Usuário
+            var fakeToken = HttpContext.Request.Headers["Token"].ToString();
+
+            // Verifica se o Token do tipo Guid válido se sim ele o envia para a variavel token
+            if (!Guid.TryParse(fakeToken, out var token))
+            {
+
+                throw new ArgumentException("Token inválido.");
+            }
+
+            return token;
+        }
+
     }
 }

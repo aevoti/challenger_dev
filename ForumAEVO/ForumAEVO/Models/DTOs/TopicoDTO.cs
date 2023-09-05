@@ -3,9 +3,9 @@
     public class TopicoDto
     {
         public Guid UserId { get; set; }
-        public List<ComentarioDto>? Comentarios { get; set; }
         public Guid Id { get; set; }
         public string Msg { get; set; } = string.Empty;
-        public DateTime Data { get; set; }
+        public string Data { get; set; } = string.Empty;
+        public List<ComentarioDto>? Comentarios { get; set; }
     }
 }

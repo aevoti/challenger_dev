@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ForumAEVO.Models;
 using ForumAEVO.Models.DTOs;
@@ -30,6 +25,7 @@ namespace ForumAEVO.Controllers
                 .Include(t => t.Comentarios)
                 .ToListAsync();
 
+            //Buscando os topicos do Forum e exibindo de maneira organizada na API
             var topicosDto = topicos.Select(t => new TopicoDto
             {
                 UserId = t.UserId,
@@ -38,10 +34,12 @@ namespace ForumAEVO.Controllers
                     UserId = c.UserId,
                     Id = c.Id,
                     Msg = c.Msg,
-                    TopicoId = c.TopicoId
+                    TopicoId = c.TopicoId,
+                    Data = t.Data.ToString("dd-MM-yyyy")
                 }).ToList(),
                 Id = t.Id,
-                Msg = t.Msg
+                Msg = t.Msg,
+                Data = t.Data.ToString("dd-MM-yyyy") 
             }).ToList();
 
             return Ok(topicosDto);

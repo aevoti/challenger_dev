@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ForumAEVO.Models;
 using ForumAEVO.Models.DTOs;
@@ -20,39 +16,45 @@ namespace ForumAEVO.Controllers
             _context = context;
         }
 
-        // GET: api/topicos/5 DEPOIS tratar se o Id nao existir
+        // GET: api/topicos/5 
         [HttpGet("{id}")]
         public async Task<ActionResult<Topico>> GetTopico(Guid id)
         {
             var topico = await _context.Topicos
-                .Include(t => t.Usuario) 
-                .Include(t => t.Comentarios) 
-                .ThenInclude(c => c.Usuario) 
-                .FirstOrDefaultAsync(m => m.Id == id);
+                   .Include(t => t.Comentarios)
+                   .FirstOrDefaultAsync(t => t.Id == id);
 
             if (topico == null)
             {
-                return NotFound();
+                return NotFound("Não existe tópico com este ID.");
             }
 
-            return topico;
-        }
+            // Confingurando saida do objeto para a API
+            var resultado = new
+            {
+                userId = topico.UserId.ToString(),
+                id = topico.Id.ToString(),
+                msg = topico.Msg,
+                data = topico.Data.ToString("dd-MM-yyyy"),
+                comentarios = topico.Comentarios.Select(c => new
+                {
+                    userId = c.UserId.ToString(),
+                    id = c.Id.ToString(),
+                    msg = c.Msg,
+                    data = c.Data.ToString("dd-MM-yyyy")
+                }).ToList()
+            };
 
+            return Ok(resultado);
+        }
 
         // POST: api/topicos
         [HttpPost]
         public async Task<ActionResult<Topico>> PostTopico([FromBody] Topico topico)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
             topico.Id = Guid.NewGuid();
-            topico.Data = DateTime.Now.Date; // informando apenas a data no formato dd/mm/aaaa
-
-            // Inclui o usuário associado ao tópico
-            topico.Usuario = await _context.Usuarios.FindAsync(topico.UserId);
+            topico.Data = DateTime.Now.Date; // informando apenas a data
 
             _context.Topicos.Add(topico);
             await _context.SaveChangesAsync();
@@ -60,10 +62,11 @@ namespace ForumAEVO.Controllers
             return CreatedAtAction("GetTopico", new { id = topico.Id }, topico);
         }
 
-        // PUT: api/topicos/5
+        // PUT: api/topicos/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTopico(Guid id, [FromBody] MsgUpdateDTO topicoMsgUpdateDTO)
-        {
+        {   
+
             if (topicoMsgUpdateDTO == null)
             {
                 return BadRequest("Dados de atualização inválidos.");
@@ -76,7 +79,18 @@ namespace ForumAEVO.Controllers
                 return NotFound("Tópico não encontrado.");
             }
 
-            // Atualiza apenas o campo de mensagem do tópico com o valor fornecido no DTO.
+            var fakeToken= HttpContext.Request.Headers["Token"].ToString();
+            if (!Guid.TryParse(fakeToken, out var userId))
+            {
+                return BadRequest("Headers Token inválido.");
+            }
+
+            if (topico.UserId != userId)
+            {
+                return Unauthorized("Você não tem permissão para editar este tópico.");
+            }
+
+            // Atualizando o comentário
             topico.Msg = topicoMsgUpdateDTO.Msg;
 
             try
@@ -89,7 +103,7 @@ namespace ForumAEVO.Controllers
                 {
                     return NotFound("Tópico não encontrado.");
                 }
-                else
+                else //se houver exeção a biblioteca lançará
                 {
                     throw;
                 }
@@ -98,18 +112,27 @@ namespace ForumAEVO.Controllers
             return NoContent();
         }
 
-
-        // DELETE: api/topicos/5
+        // DELETE: api/topicos/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTopico(Guid id)
         {
             var topico = await _context.Topicos.FindAsync(id);
             if (topico == null)
             {
-                return NotFound();
+                return NotFound("O Tópico procurado não existe.");
             }
 
-            // Excluir os comentários associados a este tópico
+            var userIdHeader = HttpContext.Request.Headers["Token"].ToString();
+            if (!Guid.TryParse(userIdHeader, out var userId))
+            {
+                return BadRequest("UserId inválido.");
+            }
+
+            if (topico.UserId != userId)
+            {
+                return Unauthorized("Você não tem permissão para excluir este tópico.");
+            }
+
             var comentarios = _context.Comentarios.Where(c => c.TopicoId == id);
             _context.Comentarios.RemoveRange(comentarios);
 
@@ -120,8 +143,7 @@ namespace ForumAEVO.Controllers
             return NoContent();
         }
 
-
-        private bool TopicoExists(Guid id)
+            private bool TopicoExists(Guid id)
         {
             return _context.Topicos.Any(e => e.Id == id);
         }
