@@ -8,6 +8,7 @@ namespace Forum.WebAPI.Models;
 
 public class Comentario
 {
+    public Comentario () { }
     public Comentario(int id, string descricao, int usuarioId, int topicoId) 
     {
         this.Id = id;
