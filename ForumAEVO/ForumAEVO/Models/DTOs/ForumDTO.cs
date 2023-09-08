@@ -1,17 +1,15 @@
-﻿using System.Text.Json.Serialization;
-
-namespace ForumAEVO.Models.DTOs
+﻿namespace ForumAEVO.Models.DTOs
 {
-    public class TopicoDto
+    public class ForumDTO
     {
-        [JsonIgnore]
+
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public string Msg { get; set; } = string.Empty;
-        [JsonIgnore] 
+
         public string Data { get; set; } = string.Empty;
 
-        [JsonIgnore]
         public List<ComentarioDto>? Comentarios { get; set; }
     }
 }
+

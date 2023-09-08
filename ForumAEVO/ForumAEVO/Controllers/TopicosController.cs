@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ForumAEVO.Models;
 using ForumAEVO.Models.DTOs;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace ForumAEVO.Controllers
 {
@@ -49,12 +50,20 @@ namespace ForumAEVO.Controllers
         }
 
         // POST: api/topicos
-        [HttpPost]
-        public async Task<ActionResult<Topico>> PostTopico([FromBody] Topico topico)
+        [HttpPost] 
+        public async Task<ActionResult<Topico>> PostTopico([FromBody] TopicoDto topicodto)
         {
+            var topico = new Topico();
+            
+            if (topicodto == null)
+            {
+                return BadRequest("Dados de atualização inválidos.");
+            }
 
             topico.Id = Guid.NewGuid();
-            topico.Data = DateTime.Now.Date; // informando apenas a data
+            topico.Data = DateTime.Now.Date;
+            topico.UserId = topicodto.UserId;
+            topico.Msg = topicodto.Msg;
 
             _context.Topicos.Add(topico);
             await _context.SaveChangesAsync();
@@ -64,10 +73,11 @@ namespace ForumAEVO.Controllers
 
         // PUT: api/topicos/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTopico(Guid id, [FromBody] MsgUpdateDTO topicoMsgUpdateDTO)
+        [ProducesResponseType(typeof(MsgUpdateDTO), 204)]
+        public async Task<IActionResult> PutTopico(Guid id, [FromBody] MsgUpdateDTO topicoMsgUpdate)
         {   
 
-            if (topicoMsgUpdateDTO == null)
+            if (topicoMsgUpdate == null)
             {
                 return BadRequest("Dados de atualização inválidos.");
             }
@@ -91,7 +101,7 @@ namespace ForumAEVO.Controllers
             }
 
             // Atualizando o comentário
-            topico.Msg = topicoMsgUpdateDTO.Msg;
+            topico.Msg = topicoMsgUpdate.Msg;
 
             try
             {
@@ -103,7 +113,7 @@ namespace ForumAEVO.Controllers
                 {
                     return NotFound("Tópico não encontrado.");
                 }
-                else //se houver exeção a biblioteca lançará
+                else //se houver exceção a biblioteca lançará
                 {
                     throw;
                 }

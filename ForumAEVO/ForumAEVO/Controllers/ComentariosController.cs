@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ForumAEVO.Models;
 using ForumAEVO.Models.DTOs;
-
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace ForumAEVO.Controllers
 {
@@ -20,15 +20,23 @@ namespace ForumAEVO.Controllers
 
         // POST: api/comentarios
         [HttpPost]
-        public async Task<ActionResult<Comentario>> PostComentario([FromBody] Comentario comentario)
+        [ProducesResponseType(typeof(Comentario), 200)]
+        public async Task<ActionResult<Comentario>> PostComentario([FromBody] ComentarioDto comentarioDto)
         {
-            if (comentario == null)
+            if (comentarioDto == null)
             {
                 return BadRequest("O objeto de comentário não pode ser nulo.");
             }
+            var comentario = new Comentario
+            {
+                Id = Guid.NewGuid(),
+                UserId = comentarioDto.UserId,
+                Data = DateTime.Now.Date,
+                TopicoId = comentarioDto.TopicoId,
+                Msg = comentarioDto.Msg
 
-            comentario.Id = Guid.NewGuid();
-            comentario.Data = DateTime.Now.Date; // Define a data atual sem a hora
+            };
+           
 
             _context.Comentarios.Add(comentario);
             await _context.SaveChangesAsync();
@@ -38,6 +46,7 @@ namespace ForumAEVO.Controllers
 
         //PUT: api/comentarios/{idTopico}/{id}
         [HttpPut("{idTopico}/{id}")]
+
         public async Task<IActionResult> PutComentario(Guid idTopico, Guid id, [FromBody] ComentarioDto comentarioDto)
         {
             var userId = GetAndValidateToken();
