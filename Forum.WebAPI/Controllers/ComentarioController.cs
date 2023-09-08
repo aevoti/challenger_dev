@@ -1,106 +1,101 @@
 using Forum.WebAPI.Data;
+using Forum.WebAPI.Dtos;
 using Forum.WebAPI.Models;
+using Forum.WebAPI.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Forum.WebAPI.Controllers;
 
 [ApiController]
-[Route("[controller]")]
 public class ComentarioController : ControllerBase
 {
-    private readonly ApplicationDbContext _context;
-    public ComentarioController(ApplicationDbContext context) 
-    { 
-        _context = context;
+    private readonly IComentarioRepository _comentarioRepository;
+    private readonly ITopicoRepository _topicoRepository;
+
+    public ComentarioController(IComentarioRepository comentarioRepository, ITopicoRepository topicoRepository)
+    {
+        _comentarioRepository = comentarioRepository;
+        _topicoRepository = topicoRepository;
     }
 
     // /comentario/{idTopico} - [POST] - Deve cadastrar um novo comentario no topico de id especificado
-    [HttpPost("{idTopico}")]
-    public async Task<ActionResult<Comentario>> Post(int idTopico, Comentario comentario)
+    [HttpPost("comentario/{idTopico}")]
+    public IActionResult Post(int idTopico, ComentarioDTO comentarioDTO)
     {
-        var topico = _context.Topicos.Find(idTopico);
+        var topico = _topicoRepository.GetTopicoById(idTopico);
+        if (topico == null)
+        {
+            return NotFound("Tópico não encontrado.");
+        }
+
+        if (comentarioDTO == null)
+        {
+            return BadRequest("Dados inválidos.");
+        }
+
+        var novoComentario = new Comentario
+        {
+            Descricao = comentarioDTO.Descricao,
+            UsuarioId = comentarioDTO.UsuarioId,
+            TopicoId = idTopico
+        };
+
+        _comentarioRepository.Add(novoComentario);
+
+        return CreatedAtAction(nameof(Post), new { idTopico = novoComentario.TopicoId, id = novoComentario.Id }, novoComentario);
+    }
+
+    // comentario/{idTopico}/{id} - [PUT] - Deve atualizar um comentario com o id especificado 
+    [HttpPut("comentario/{idTopico}/{idComentario}")]
+    public IActionResult Put(int idTopico, int idComentario, ComentarioDTO comentarioAtualizado)
+    {
+        var topico = _topicoRepository.GetTopicoById(idTopico);
 
         if (topico == null)
         {
             return NotFound("Tópico não encontrado.");
         }
 
-        // Defina a relação entre o comentário e o tópico
-        comentario.TopicoId = idTopico;
-
-        _context.Comentarios.Add(comentario);
-        await _context.SaveChangesAsync();
-
-        return CreatedAtAction(nameof(Get), new { idTopico, id = comentario.Id }, comentario);
-    }
-
-    // comentario/{idTopico}/{id} - [PUT] - Deve atualizar um comentario com o id especificado 
-    [HttpPut("{idTopico}/{id}")]
-    public async Task<IActionResult> Put(int idTopico, int id, Comentario comentarioAtualizado)
-    {
-        if (id != comentarioAtualizado.Id)
-        {
-            return BadRequest("Dados inválidos.");
-        }
-
-        var comentarioExistente = _context.Comentarios.Find(id);
+        var comentarioExistente = _comentarioRepository.GetComentario(idTopico, idComentario);
 
         if (comentarioExistente == null)
         {
             return NotFound("Comentário não encontrado.");
         }
 
-        if (comentarioExistente.TopicoId != idTopico)
+        comentarioExistente.Descricao = comentarioAtualizado.Descricao;
+        _comentarioRepository.Update(comentarioExistente);
+        if(_topicoRepository.SaveChanges())
         {
-            return BadRequest("Este comentário não pertence a este tópico.");
+            return Ok("Comentário atualizado");
         }
 
-        // Atualize as propriedades do comentário existente com base no comentário atualizado
-        comentarioExistente.Descricao = comentarioAtualizado.Descricao;
-
-        await _context.SaveChangesAsync();
-
-        return NoContent();
+        return BadRequest("Comentário não atualizado");
     }
 
     // /comentario/{idTopico}/{id} - [DELETE] - Deve deletar um comentario com o id especificado 
-    [HttpDelete("{idTopico}/{id}")]
-    public async Task<IActionResult> Delete(int idTopico, int id)
+    [HttpDelete("comentario/{idTopico}/{idComentario}")]
+    public IActionResult Delete(int idTopico, int idComentario)
     {
-        var comentario = await _context.Comentarios.FindAsync(id);
+        var topico = _topicoRepository.GetTopicoById(idTopico);
+        if (topico == null)
+        {
+            return NotFound("Tópico não encontrado.");
+        }
+
+        var comentario = _comentarioRepository.GetComentario(idTopico, idComentario);
 
         if (comentario == null)
         {
             return NotFound("Comentário não encontrado.");
         }
 
-        if (comentario.TopicoId != idTopico)
+        _comentarioRepository.Remove(comentario);
+        if(_comentarioRepository.SaveChanges())
         {
-            return BadRequest("Este comentário não pertence a este tópico.");
+            return Ok("Comentário deletado");
         }
 
-        _context.Comentarios.Remove(comentario);
-        await _context.SaveChangesAsync();
-
-        return NoContent();
-    }
-
-    // /comentario/{idTopico}/{id} - [GET] - Deve retornar um comentario com o id especificado
-    [HttpGet("{idTopico}/{id}")]
-    public async Task<ActionResult<Comentario>> Get(int idTopico, int id)
-    {
-        var comentario = await _context.Comentarios.FindAsync(id);
-
-        if (comentario == null)
-        {
-            return NotFound("Comentário não encontrado.");
-        }
-
-        if (comentario.TopicoId != idTopico)
-        {
-            return BadRequest("Este comentário não pertence a este tópico.");
-        }
-
-        return Ok(comentario);
+        return BadRequest("Comentário não deletado");
     }
 }

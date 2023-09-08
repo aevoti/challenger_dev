@@ -17,10 +17,10 @@ public class Comentario
         this.TopicoId = topicoId;
     }
     public int Id { get; set; }
-    public string Descricao { get; set; }
+    public string? Descricao { get; set; }
     public int UsuarioId { get; set; } // Chave estrangeira para o autor
-    public Usuario Usuario { get; set; } // Autor do comentário
+    public Usuario? Usuario { get; set; } // Autor do comentário
     public int TopicoId { get; set; } // Chave estrangeira para o tópico ao qual o comentário pertence
-    public Topico Topico { get; set; } // Tópico ao qual o comentário pertence
+    public Topico? Topico { get; set; } // Tópico ao qual o comentário pertence
 
 }

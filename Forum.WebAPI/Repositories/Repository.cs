@@ -12,31 +12,26 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
 
     public Repository(ApplicationDbContext context)
     {
-        _context = context;
+        _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
-    public IEnumerable<TEntity>? GetAll()
+    public void Add<T>(T entity) where T : class
     {
-        return _context.Set<TEntity>().ToList();
+        _context.Add(entity);
     }
 
-    public TEntity? GetById(int id)
+    public void Update<T>(T entity) where T : class
     {
-        return _context.Set<TEntity>().Find(id);
+        _context.Update(entity);
     }
 
-    public void Add(TEntity entity)
+    public void Remove<T>(T entity) where T : class
     {
-        _context.Set<TEntity>().Add(entity);
+        _context.Remove(entity);
     }
 
-    public void Update(TEntity entity)
+    public bool SaveChanges()
     {
-        _context.Set<TEntity>().Update(entity);
-    }
-
-    public void Remove(TEntity entity)
-    {
-        _context.Set<TEntity>().Remove(entity);
+        return (_context.SaveChanges() > 0);
     }
 }

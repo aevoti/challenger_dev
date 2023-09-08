@@ -6,9 +6,7 @@ using Forum.WebAPI.Models;
 
 namespace Forum.WebAPI.Repositories;
 
-public interface ITopicoRepository : IRepository<Topico>
+public interface IUsuarioRepository : IRepository<Usuario>
 {
-    Topico? GetTopicoById(int idTopico);
-
-    IEnumerable<Topico>? GetAllTopicos();
+    Usuario? GetUsuarioById(int id);
 }
