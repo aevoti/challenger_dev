@@ -34,9 +34,9 @@ public class ApplicationDbContext : DbContext
             
         modelBuilder.Entity<Topico>()
             .HasData(new List<Topico>{
-                new Topico(1, "Carros", "Carros sao caros", 1),
-                new Topico(2, "Comida", "Comidas sao cozidas", 2),
-                new Topico(3, "Materiais Escolares", "Canetas bic", 2)
+                new Topico(1, "Carros", "Carros sao caros", 1, DateTime.Now),
+                new Topico(2, "Comida", "Comidas sao cozidas", 2, DateTime.Now),
+                new Topico(3, "Materiais Escolares", "Canetas bic", 2, DateTime.Now)
             });
 
     }

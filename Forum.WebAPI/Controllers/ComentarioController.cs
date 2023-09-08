@@ -1,4 +1,3 @@
-using Forum.WebAPI.Data;
 using Forum.WebAPI.Dtos;
 using Forum.WebAPI.Models;
 using Forum.WebAPI.Repositories;
@@ -41,8 +40,12 @@ public class ComentarioController : ControllerBase
         };
 
         _comentarioRepository.Add(novoComentario);
-
-        return CreatedAtAction(nameof(Post), new { idTopico = novoComentario.TopicoId, id = novoComentario.Id }, novoComentario);
+        if(_comentarioRepository.SaveChanges())
+        {
+            return CreatedAtAction(nameof(Post), new { idTopico = novoComentario.TopicoId, id = novoComentario.Id }, novoComentario);
+        }
+        
+        return BadRequest("Comentário não cadastrado");
     }
 
     // comentario/{idTopico}/{id} - [PUT] - Deve atualizar um comentario com o id especificado 

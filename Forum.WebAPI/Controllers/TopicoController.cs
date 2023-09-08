@@ -1,4 +1,5 @@
 using Forum.WebAPI.Dtos;
+using Forum.WebAPI.Enums;
 using Forum.WebAPI.Models;
 using Forum.WebAPI.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -19,9 +20,10 @@ public class TopicoController : ControllerBase
 
     // /forum - [GET] - Deve Retornar todos os topicos enviados
     [HttpGet("forum")]
-    public IActionResult GetForumTopics()
+    public IActionResult GetForumTopics(TipoDeOrdenacao? order = null, string searchText = "")
     {
-        var topicos = _topicoRepository.GetAllTopicos();
+        TipoDeOrdenacao valorOrdenacao = order ?? TipoDeOrdenacao.Crescente;
+        var topicos = _topicoRepository.GetTopicosOrdenadosEOuPesquisados(valorOrdenacao, searchText);
         return Ok(topicos);
     }
 
@@ -36,8 +38,7 @@ public class TopicoController : ControllerBase
             return NotFound();
         }
 
-        var topicoDTO = TopicoDTO.MapToDTO(topico);
-        return Ok(topicoDTO);
+        return Ok(topico);
     }
 
     // /topico - [POST] - Deve cadastrar um novo topico
@@ -60,7 +61,8 @@ public class TopicoController : ControllerBase
         {
             Titulo = topicoDTO.Titulo,
             Descricao = topicoDTO.Descricao,
-            UsuarioId = topicoDTO.UsuarioId
+            UsuarioId = topicoDTO.UsuarioId,
+            DataCriacao =  DateTime.Now
         };
 
         _topicoRepository.Add(novoTopico);
