@@ -1,7 +1,7 @@
 <div class="container">
   <div class="search-input">
-    <input type="text" placeholder="Busque um tópico">
-    <i class="bi bi-search"></i>
+    <input type="text" [(ngModel)]="searchText" (keyup.enter)="pesquisar()" placeholder="Busque um tópico">
+    <i class="bi bi-search" style="cursor:pointer" (click)="pesquisar()"></i>
   </div>
   <h1>Fórum de Discussão</h1>
 

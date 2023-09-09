@@ -10,7 +10,7 @@
         width: 300px;
         border-radius: 5px;
         height: 35px;
-        border: 1px solid #e5e5e5;
+        border: 1px solid var(--borderAEVO);
         padding: 0px 8px;
         align-self: flex-end;
         input{
@@ -31,4 +31,5 @@
     margin-top: 10px;
     background-color: #FCFCFC;
 }
+
 

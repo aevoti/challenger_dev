@@ -10,7 +10,7 @@ export class TopicoService {
 
     constructor(private http:HttpClient) { }
 
-    getTopico(order:string = "Crescente", searchText:string):Observable<Topico[]>{
+    getTopicos(order:string = "Crescente", searchText:string):Observable<Topico[]>{
         return this.http.get<Topico[]>(`${enviroment.APIURL}forum`, 
             {params:{order, searchText}})
     }

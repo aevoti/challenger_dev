@@ -8,12 +8,14 @@ import { CreateTopicComponent } from 'src/components/createTopic/createTopic.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TopicoService } from './services/topicoService/topico.service';
 import { HttpClientModule } from '@angular/common/http';
+import { SetOrderComponent } from 'src/components/setOrder/setOrder.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    CreateTopicComponent
+    CreateTopicComponent,
+    SetOrderComponent
   ],
   imports: [
     BrowserModule,
