@@ -41,9 +41,7 @@ O Objetivo dessa etapa é criar apis para um fórum onde um usuário pode fazer 
     /comentario/{idTopico}/{id} - [PUT] - Deve atualizar um comentario com o id especificado (Se o usuário for autor do comentario)
     /comentario/{idTopico}/{id} - [DELETE] - Deve deletar um comentario com o id especificado (Se o usuário for autor do comentario)
 
-Você pode utilizar um banco de dados local SQL Server para a persistência dos dados.
-
-## Front-End /Angular
+Você pode utilizar um banco de dados local SQL Server para a persistência dos dados.## Front-End /Angular
 Para a segunda etapa do teste, você deverá desenvolver uma SPA (Single Page Application) utilizando Angular. Nela, deverá ser possível:
 
 **Obrigatorio**  - Você deverá desenvolver no minimo uma tela com as seguintes funcionalidades:
@@ -81,6 +79,8 @@ Serão considerados pontos positivos, porém não são obrigatórios:
  5. Diferencial - Ordenação dos topicos no back;
  6. Diferencial - Design patterns e rotinas para testes;
  7. Diferencial - Boas Práticas de orientação a objetos;
+
+
 
 <br>
 
