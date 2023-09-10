@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "njExhpl4QxAc5G2J9HyrkecKxcuYt/W9YMFsdUGmkePxn5a9sv3F3fBLzcLzQl3l4vTbZ+eqUz1FZZudd+hPfA==",
+  "dgSpecHash": "IkVeMGp1VWFhAWmAkiFASamMx0JQoHY2EqwyBksL7bS1To2hwiU7SAfJAvaY069HKTP0stjBtVRJw+Qrq3AGHg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\tadeu\\Documents\\Aevo\\challenger_dev\\ForumAEVO\\ForumAEVO\\ForumAEVO.csproj",
+  "projectFilePath": "C:\\Users\\tadeu\\Documents\\HTML\\challenger_dev\\ForumAEVO\\ForumAEVO\\ForumAEVO.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\tadeu\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\tadeu\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

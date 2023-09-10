@@ -593,3 +593,10 @@ C:\Users\tadeu\Documents\Aevo\challenger_dev\ForumAEVO\ForumAEVO\bin\Debug\net6.
 C:\Users\tadeu\Documents\Aevo\challenger_dev\ForumAEVO\ForumAEVO\obj\Debug\net6.0\ForumAEVO.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\tadeu\Documents\Aevo\challenger_dev\ForumAEVO\ForumAEVO\bin\Debug\net6.0\Swashbuckle.AspNetCore.Annotations.dll
 C:\Users\tadeu\Documents\Aevo\challenger_dev\ForumAEVO\ForumAEVO\bin\Debug\net6.0\NSwag.Annotations.dll
+C:\Users\tadeu\Documents\HTML\challenger_dev\ForumAEVO\ForumAEVO\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\tadeu\Documents\HTML\challenger_dev\ForumAEVO\ForumAEVO\bin\Debug\net6.0\NSwag.Annotations.dll
+C:\Users\tadeu\Documents\HTML\challenger_dev\ForumAEVO\ForumAEVO\bin\Debug\net6.0\Swashbuckle.AspNetCore.Annotations.dll
+C:\Users\tadeu\Documents\HTML\challenger_dev\ForumAEVO\ForumAEVO\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\tadeu\Documents\HTML\challenger_dev\ForumAEVO\ForumAEVO\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\tadeu\Documents\HTML\challenger_dev\ForumAEVO\ForumAEVO\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\tadeu\Documents\HTML\challenger_dev\ForumAEVO\ForumAEVO\obj\Debug\net6.0\ForumAEVO.MvcApplicationPartsAssemblyInfo.cs
