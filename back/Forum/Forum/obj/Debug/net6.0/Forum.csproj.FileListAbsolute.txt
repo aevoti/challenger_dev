@@ -259,8 +259,6 @@ C:\Users\55279\Documents\Projetos\AEVO\challenger_dev\back\Forum\Forum\obj\Debug
 C:\Users\55279\Documents\Projetos\AEVO\challenger_dev\back\Forum\Forum\obj\Debug\net6.0\Forum.csproj.CoreCompileInputs.cache
 C:\Users\55279\Documents\Projetos\AEVO\challenger_dev\back\Forum\Forum\obj\Debug\net6.0\Forum.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\55279\Documents\Projetos\AEVO\challenger_dev\back\Forum\Forum\obj\Debug\net6.0\Forum.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\55279\Documents\Projetos\AEVO\challenger_dev\back\Forum\Forum\obj\Debug\net6.0\Forum.RazorAssemblyInfo.cache
-C:\Users\55279\Documents\Projetos\AEVO\challenger_dev\back\Forum\Forum\obj\Debug\net6.0\Forum.RazorAssemblyInfo.cs
 C:\Users\55279\Documents\Projetos\AEVO\challenger_dev\back\Forum\Forum\obj\Debug\net6.0\staticwebassets\msbuild.Forum.Microsoft.AspNetCore.StaticWebAssets.props
 C:\Users\55279\Documents\Projetos\AEVO\challenger_dev\back\Forum\Forum\obj\Debug\net6.0\staticwebassets\msbuild.build.Forum.props
 C:\Users\55279\Documents\Projetos\AEVO\challenger_dev\back\Forum\Forum\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.Forum.props
