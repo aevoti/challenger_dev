@@ -1,36 +1,60 @@
 
-# Task - Prática
+# Visão Geral do Projeto:
 
-Olá! 👋
-Primeiramente, parabéns por ter chegado até aqui! Essa tem sido uma jornada seletiva de altíssimo nível, você se destacou na Etapa de Cadastro e não temos dúvidas de que irá brilhar neste desafio!
-E como funcionará a Task Prática?
- 
-Dividimos em duas etapas, para que você possa aplicar seus conhecimentos e práticas, em cada uma das frentes de desenvolvimento.
-O desafio consiste em uma pequena implementação para avaliarmos seu conhecimento em Back-End (.NET, C#) e Front-End (HTML5, CSS, JavaScript e Angular)
+A API deste projeto foi desenvolvida para dar suporte a um fórum online, onde os usuários podem criar tópicos de discussão e comentários. Ela permite a interação dos usuários por meio de operações básicas de criação, leitura, atualização e exclusão (CRUD) em tópicos e comentários. Além disso, a API oferece recursos para pesquisa, ordenação e filtragem de tópicos.
 
-Para realizá-lo, você deverá dar um fork neste repositório e depois cloná-lo em alguma pasta de sua preferência, na máquina que estiver realizando o teste.
-Crie um branch com seu nome a partir da master e, quando finalizar todo o desenvolvimento, você deverá enviar um pull-request com sua versão.
+Principais Funcionalidades:
 
-Caso precise consultar algum material de apoio, recomendamos:<br>
-Para o back: https://www.macoratti.net/19/10/ang7_apinc1.htm<br>
-Para o front: https://www.youtube.com/@loianegroner <br>
+A API possui as seguintes funcionalidades principais:
+    Tópicos:
+        Listar todos os tópicos existentes.
+        Recuperar informações detalhadas de um tópico específico com base em seu ID.
+        Criar um novo tópico.
+        Atualizar as informações de um tópico existente.
+        Excluir um tópico com base em seu ID.
 
-# O Desafio
-## Back-End/.NET
-A primeira etapa será o desenvolvimento back-end!
+    Comentários:
+        Criar um novo comentário em um tópico específico.
+        Atualizar as informações de um comentário existente (apenas se o usuário for o autor do comentário).
+        Excluir um comentário existente (apenas se o usuário for o autor do comentário).
 
-Descrição:
+    Pesquisa e Ordenação:
+        Pesquisar tópicos com base no conteúdo de texto em seus títulos e descrições.
+        Ordenar tópicos existentes por data de criação, em ordem crescente ou decrescente.
+        
+# Tecnologias Utilizadas:
+    .NET Core 7.0: A plataforma principal para o desenvolvimento do backend.
+    Entity Framework Core: Um ORM (Object-Relational Mapping) para interagir com o banco de dados.
+    SQLite: O banco de dados utilizado para armazenar os dados da aplicação.
+    ASP.NET Core Web API: Um framework para a criação de APIs web.
+    C#: A linguagem de programação utilizada para desenvolver o backend.
+    Angular 16.2.0: A estrutura utilizada para desenvolver a interface do usuário (frontend).
+    HTML/SCSS/TypeScript: Linguagens e tecnologias front-end comuns para o desenvolvimento de aplicativos da web.
 
-O Objetivo dessa etapa é criar apis para um fórum onde um usuário pode fazer o CRUD básico de um tópico e realizar comentários dentro desse tópico, como uma discussão. A parte referente aos usuários não precisa ser implementado, podendo mockar os dados no front ou no back de acordo com a sua preferencia, sugerimos utilizar a seguinte estrutura para usuários:
+# Executando o Aplicativo Angular (ForumApp):
 
-    {
-	    Id: int;
-	    Nome: string;
-	    Email: string;
-	    Foto: string;
-    }
+Para executar o aplicativo Angular, siga os seguintes passos:
 
-**Obrigatorio**  - Você deverá desenvolver as seguintes rotas em .Net Core(Versão de sua preferencia):
+Certifique-se de que você possui o Angular CLI instalado globalmente em sua máquina. Se ainda não tiver, você pode instalá-lo usando o seguinte comando:
+    npm install -g @angular/cli
+Navegue até a raiz do aplicativo Angular (./ForumApp)
+Instale as dependências do projeto com o seguinte comando:
+    npm install
+Após a conclusão da instalação, você pode iniciar o servidor do Angular com o seguinte comando:
+    ng serve
+O servidor de desenvolvimento será iniciado e estará disponível em 'http://localhost:4200/'
+
+
+# Executando a API .NET Core (Forum.WebAPI):
+
+Certifique-se de que você possui o .NET SDK 7.0 instalado em sua máquina. Você pode baixá-lo em https://dotnet.microsoft.com/pt-br/download/dotnet/7.0
+Navegue até a raiz do aplicativo Angular (./Forum.WebAPI)
+Dentro do diretório da API, execute o seguinte comando para restaurar as dependências do projeto:
+    dotnet restore
+Após a restauração das dependências, você pode iniciar a aplicação .NET Core com o seguinte comando:
+    dotnet run
+
+# Lista dos endpoints da API.
 
     /forum - [GET] - Deve Retornar todos os topicos enviados
     /topico/{id} - [GET] - Deve retornar um topico com id especificado
@@ -41,53 +65,6 @@ O Objetivo dessa etapa é criar apis para um fórum onde um usuário pode fazer 
     /comentario/{idTopico}/{id} - [PUT] - Deve atualizar um comentario com o id especificado (Se o usuário for autor do comentario)
     /comentario/{idTopico}/{id} - [DELETE] - Deve deletar um comentario com o id especificado (Se o usuário for autor do comentario)
 
-Você pode utilizar um banco de dados local SQL Server para a persistência dos dados.
-
-## Front-End /Angular
-Para a segunda etapa do teste, você deverá desenvolver uma SPA (Single Page Application) utilizando Angular. Nela, deverá ser possível:
-
-**Obrigatorio**  - Você deverá desenvolver no minimo uma tela com as seguintes funcionalidades:
-
-- Ver lista de tópicos
-- Criar tópico
-- Editar um tópico existente
-- Excluir um tópico existente
-- Ordenar os tópicos existentes (Data Crescente e Decrescente) 
-- Pesquisar um tópico (Conteúdo do texto do tópico)
-- Criar comentário
-- Editar comentário
-- Excluir comentário
-- Visualizar um tópico e seus comentários
-
-Seguindo o exemplo:
-![image](https://github.com/aevoti/challenger_dev/assets/13247527/f6a63f36-aab0-4422-b92f-da8c2da48a4a)
-![image](https://github.com/aevoti/challenger_dev/assets/13247527/fd47382f-db77-4dcf-ab83-0aa9885cc0e0)
-![image](https://github.com/aevoti/challenger_dev/assets/13247527/25c7520d-bcdf-4253-ab3d-370ae583b130)
-![image](https://github.com/aevoti/challenger_dev/assets/13247527/de1cd467-1bf2-4567-9aff-48a188fe18d0)
-
-
-### Observações importantes:
-Você pode desenvolver o front na sua versão do Angular de preferência, se atentando para utilizar uma versão superior ou igual a 6.<br>
-Você pode modelar as classes de comentário e de tópicos da forma que achar mais conveniente para o desenvolvimento.<br>
-Você pode fazer adequações no front visando melhorar a experiencia do usuário, mas tente manter o mais fidedigno ao protótipo.<br>
-Você pode usar ferramentas de automação, mas deverá informar o uso completo para funcionamento do desafio.<br><br>
-
-Serão considerados pontos positivos, porém não são obrigatórios: 
-
- 1. Diferencial - Escrever testes unitarios para os endpoints;
- 2. Diferencial - Utilização de documentação para o mini projeto;
- 3. Diferencial - Publicação do projeto em algum ambiente online;
- 4. Diferencial - Filtragem por texto no back;
- 5. Diferencial - Ordenação dos topicos no back;
- 6. Diferencial - Design patterns e rotinas para testes;
- 7. Diferencial - Boas Práticas de orientação a objetos;
-
-<br>
-
-Qualquer problema ou dificuldade com o repositório, você pode entrar em contato conosco pelos e-mails, carlos.pedroni@aevo.com.br ou rh@aevo.com.br para que possamos sanar todas as dúvidas!
-<br><br>
-Estamos sempre em busca de melhoria. Por isso, caso tenha alguma sugestão, fique à vontade para compartilhar conosco! Boa sorte! 💛
-
-
+Para maiores detalhes do uso de cada endpoint, visitar http://localhost:5148/swagger/index.html com o ambiente rodando.
 
 

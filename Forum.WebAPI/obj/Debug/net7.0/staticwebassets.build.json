@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "lb3cRiB3RelQDCWV2VHtvkA8JkS8rmDOO/vn9U+t2ow=",
+  "Source": "Forum.WebAPI",
+  "BasePath": "_content/Forum.WebAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

@@ -1,0 +1,200 @@
+.card{
+    display: flex;
+    padding: 16px 0px;
+    flex-direction: column;
+    margin-top: 32px;
+    gap: 10px;
+    border-radius: 5px;
+    border: 1px var(--borderAEVO) solid;
+    .header{
+        padding: 0px 16px;
+        display: flex;
+        justify-content: space-between;
+        .titulo{
+            padding: 5px;
+            border-radius: 5px;
+            color: var(--textAEVO);
+            border: 1px var(--borderAEVO) solid;
+        }
+        .verDiscussao{
+            display: flex;
+            font-size: 14px;
+            align-items: center;
+            p{
+                text-decoration: underline;
+                color: var(--secondaryAEVO);
+                font-weight: bold;
+            }
+            .delete{
+                font-size: 14px;
+                cursor: pointer;
+                border: none;
+                background: none;
+                color: #e16832;
+            }
+            .editar{
+                font-size: 14px;
+                cursor: pointer;
+                border: none;
+                background: none;
+                color: #ffc29e;
+            }
+        }
+    }    
+    .infoTopico{
+        padding: 0px 16px;
+        color: var(--primaryAEVO);
+        font-style: italic;
+        b{
+            font-weight: bold;
+        }
+    }
+    .cardBody{
+        padding: 0px 16px;
+        border-bottom: 1px var(--borderAEVO) solid;
+        padding-bottom: 20px;
+        p{
+            color: var(--textAEVO);
+            line-height: 20px;
+            &.ellipsis{
+                text-overflow: ellipsis;
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 4;
+                -webkit-box-orient: vertical;
+            }
+        }
+        .expand{
+            color: var(--secondaryAEVO);
+            padding: 10px 0px;
+            font-weight: bold;
+            text-decoration: underline;
+            background: none;
+            outline: none;
+            border: none;
+            cursor: pointer;
+        }
+    }
+    .editarTopico{
+        gap: 8px;
+        display: flex;
+        flex-direction: column;
+        textarea{
+            width: 100%;
+            border-radius: 5px;
+            height: 80px;
+            border: 1px solid var(--borderAEVO);
+            resize: none;
+            outline: none;
+            font-size: 14px;
+            color: var(--textAEVO);
+        }
+        button{
+            border: none;
+            align-self: flex-end;
+            width: 85px;
+            padding: 4px 10px;
+            background-color: var(--primaryAEVO);
+            color: var(--borderAEVO);
+            border-radius: 5px;
+            transition: 0.3s;
+            font-weight: bold;
+            cursor: pointer;
+            &:disabled{
+                cursor: default;
+                opacity: 0.5;
+                transition: 0.3s;
+            }
+            &:hover{
+                background-color: #D96626;
+            }
+        }
+    }
+    .infoInteracao{
+        display: flex;
+        align-items: center;
+        padding: 5px 16px;
+        justify-content: space-between;
+        .action{
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            .bi-hand-thumbs-up{
+                cursor: pointer;
+            }
+            .bi-chat-left-text{
+                color: var(--primaryAEVO);
+            }
+        }
+        .info{
+            color: var(--textAEVO);
+            font-size: 12px;
+        }
+    }
+    .comments{
+        padding: 20px;
+        background-color: #FAFAFA;
+        .expandComentarios{
+            color: var(--secondaryAEVO);
+            padding: 10px 0px;
+            font-weight: bold;
+            text-decoration: underline;
+            background: none;
+            outline: none;
+            border: none;
+            cursor: pointer;
+        }
+    }
+    .comentar{
+        display: flex;
+        flex-direction: column;
+        padding:16px;
+        .row{
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .profilePicture{ 
+            min-width: 35px;
+            height: 35px;
+            object-fit: cover;
+            border-radius: 50%;
+            overflow: hidden;
+        } 
+        .novoComentario{
+            border: 1px var(--borderAEVO) solid;
+            height: 25px;
+            width: 100%;
+            border-radius: 20px;
+            outline: none;
+            padding-left: 16px;
+        }
+        .charCount{
+            color: var(--textAEVO);
+            font-size: 13px;
+            align-self: flex-end;
+            margin-right: 115px;
+        }
+        button{
+            border: none;
+            width: 85px;
+            padding: 4px 10px;
+            background-color: var(--primaryAEVO);
+            color: var(--borderAEVO);
+            border-radius: 5px;
+            transition: 0.3s;
+            font-weight: bold;
+            cursor: pointer;
+            &:disabled{
+                cursor: default;
+                opacity: 0.5;
+                transition: 0.3s;
+            }
+            &:hover{
+                background-color: #D96626;
+            }
+        }
+    }
+    
+}

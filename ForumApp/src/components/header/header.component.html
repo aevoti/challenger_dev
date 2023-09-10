@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="search-input">
+    <input type="text" [(ngModel)]="searchText" (keyup.enter)="handleSearch()" placeholder="Busque um tópico">
+    <i class="bi bi-search" style="cursor:pointer" (click)="handleSearch()"></i>
+  </div>
+  <h1>Fórum de Discussão</h1>
+
+  <div class="about-text">
+    <p>Este é um espaço para participar de discussões, trocar informações, fazer perguntas, 
+      compartilhar opiniões e interagir com outras pessoas que têm interesses semelhantes.</p> 
+  </div>
+</div>
