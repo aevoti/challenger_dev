@@ -1,15 +1,11 @@
-using ForumAEVO.Models;
-using Microsoft.AspNetCore.Mvc;
+
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Configuration;
-using System.Text.Json;
+using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
 builder.Services.AddControllersWithViews();
 
 var configuration = new ConfigurationBuilder()
@@ -20,23 +16,64 @@ var configuration = new ConfigurationBuilder()
 builder.Services.AddDbContext<ForumAEVO.Models.Context>(options =>
     options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-// Removendo os "Lixos $id" do retorno da API
 builder.Services.AddMvc()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault;
     });
 
+// Configurando o Swagger para receber autenticação nas rotas
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new() { Title = "API Forum Aevo", Version = "v1" });
+
+    // Definir o parâmetro de cabeçalho "Token" para autenticação
+    c.AddSecurityDefinition("Token", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Insira seu token de autenticação no cabeçalho 'Token' e o Id(uuid do usuario)",
+        Name = "Token",
+        Type = SecuritySchemeType.ApiKey
+    });
+
+    // Adicionando exigência de segurança para o token
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Token"
+                }
+            },
+            new List<string>()
+        }
+    });
+});
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+// Configuração de CORS
+app.UseCors(options =>
 {
+    options.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader();
+});
 
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Minha Aplicação v1");
+        c.RoutePrefix = "";//definindo o swagger como pagina principal
+    });
 }
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

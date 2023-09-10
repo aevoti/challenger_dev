@@ -8,7 +8,7 @@ namespace ForumAEVO.Models
     {
 
         // A chave estrangeira que relaciona o tópico ao usuário
-        public Guid UserId { get; set; } = Guid.NewGuid();
+        public Guid UserId { get; set; }
 
         // armazena o usuário quem criou o topico
         [ForeignKey("UserId")]

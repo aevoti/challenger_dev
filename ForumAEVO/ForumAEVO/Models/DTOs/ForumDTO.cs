@@ -2,17 +2,19 @@
 
 namespace ForumAEVO.Models.DTOs
 {
-    public class TopicoDto
+    public class ForumDTO
     {
-        [JsonIgnore]
+
         public int Id { get; set; }
-       
+        [JsonIgnore]
         public Guid UserId { get; set; }
+        public string DonoDaPostagem { get; set; } = string.Empty;
+        public string Foto { get; set; } = string.Empty;
         public string Msg { get; set; } = string.Empty;
-        [JsonIgnore] 
+
         public string Data { get; set; } = string.Empty;
 
-        [JsonIgnore]
         public List<ComentarioDto>? Comentarios { get; set; }
     }
 }
+

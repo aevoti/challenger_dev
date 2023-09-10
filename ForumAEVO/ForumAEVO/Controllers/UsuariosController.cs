@@ -2,6 +2,7 @@
 using ForumAEVO.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace ForumAEVO.Controllers
 {
@@ -23,8 +24,9 @@ namespace ForumAEVO.Controllers
             return Ok(usuarios);
         }
 
-        // GET: api/Usuarios/{email}
+        /// GET: api/usuarios/{email}
         [HttpGet("{email}")]
+        [ProducesResponseType(typeof(UsuarioDTO), 200)]
         public async Task<IActionResult> GetByEmail(string email)
         {
             var usuario = await _context.Usuarios
@@ -47,8 +49,9 @@ namespace ForumAEVO.Controllers
             return Ok(usuarioDto);
         }
 
-        // POST: api/Usuarios
+        // POST: api/usuarios
         [HttpPost]
+        [SwaggerResponse(StatusCodes.Status200OK, "Retorna um exemplo personalizado", typeof(UsuarioDTO))]
         public async Task<IActionResult> Post([FromBody] Usuario usuario)
         {
             if (ModelState.IsValid)
@@ -56,13 +59,14 @@ namespace ForumAEVO.Controllers
                 usuario.Id = Guid.NewGuid();
                 _context.Add(usuario);
                 await _context.SaveChangesAsync();
-                return CreatedAtAction(nameof(Get), new { id = usuario.Id }, usuario);
+                return CreatedAtAction("GetUsuario", new { id = usuario.Id }, usuario);
             }
             return BadRequest(ModelState);
         }
 
-        // PUT: api/Usuarios/5
+        // PUT: api/usuarios/5
         [HttpPut("{id}")]
+        [ProducesResponseType(typeof(UsuarioDTO), 200)]
         public async Task<IActionResult> Put(Guid id, [FromBody] Usuario updateUsuario)
         {
             var existingUser = await _context.Usuarios.FindAsync(id);
@@ -93,24 +97,52 @@ namespace ForumAEVO.Controllers
                         throw;
                     }
                 }
-                return NoContent();
+
+                //Configurando o usuário para aparecer alterado como resposta na API
+                var usuarioDto = new UsuarioDTO
+                {
+
+                    Id = existingUser.Id,
+                    Nome = existingUser.Nome,
+                    Email = existingUser.Email,
+                    Foto = existingUser.Foto
+                };
+                
+
+                return Ok(usuarioDto);
             }
+
             return BadRequest(ModelState);
         }
 
-        // DELETE: api/Usuarios/5
+
+
+        // DELETE: api/usuarios/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(204)]
         public async Task<IActionResult> Delete(Guid id)
         {
+            // buscando os topicos que o usuário fez
+            var topicsToDelete = await _context.Topicos
+                .Where(t => t.UserId == id)
+                .ToListAsync();
+
+            
+            _context.Topicos.RemoveRange(topicsToDelete);
+
+            // deletando o usuario sem problemas
             var usuario = await _context.Usuarios.FindAsync(id);
             if (usuario == null)
             {
                 return NotFound();
             }
             _context.Usuarios.Remove(usuario);
+
             await _context.SaveChangesAsync();
+
             return NoContent();
         }
+
 
         private bool UsuarioExists(Guid id)
         {

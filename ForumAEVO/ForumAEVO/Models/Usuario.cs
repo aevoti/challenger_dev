@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace ForumAEVO.Models
 {
@@ -9,7 +10,8 @@ namespace ForumAEVO.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("Id")]
-        public Guid Id { get; set; } = Guid.NewGuid();//Guid armazena o UUID como número 
+        [JsonIgnore]
+        public Guid Id { get; set; } = Guid.NewGuid();//Guid armazena o UUID como número hexadecimal
 
         [Required]
         [MaxLength(100)]
@@ -27,9 +29,11 @@ namespace ForumAEVO.Models
         public string Foto { get; set; } = string.Empty;
 
         // O usuário pode ter zero ou muitos comentários
+        [JsonIgnore]
         public ICollection<Comentario> Comentarios { get; set; } = new List<Comentario>();
 
         // O usuário pode ter zero ou muitos Topicos
+        [JsonIgnore]
         public ICollection<Topico> Topicos { get; set; } = new List<Topico>();
     }
 }

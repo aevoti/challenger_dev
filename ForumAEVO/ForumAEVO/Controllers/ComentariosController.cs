@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ForumAEVO.Models;
 using ForumAEVO.Models.DTOs;
-
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace ForumAEVO.Controllers
 {
@@ -18,17 +18,25 @@ namespace ForumAEVO.Controllers
             _context = context;
         }
 
-        // POST: api/comentarios
-        [HttpPost]
-        public async Task<ActionResult<Comentario>> PostComentario([FromBody] Comentario comentario)
+ 
+        // POST: api/comentarios/{idPost}
+        [HttpPost("{idTopico}")]
+        [ProducesResponseType(typeof(Comentario), 200)]
+        public async Task<ActionResult<Comentario>> PostComentario([FromBody] MsgUpdateDTO comentarioDto,int idTopico)
         {
-            if (comentario == null)
+            if (comentarioDto == null)
             {
                 return BadRequest("O objeto de comentário não pode ser nulo.");
             }
+            var comentario = new Comentario
+            {
+                UserId = comentarioDto.UserId,
+                Data = DateTime.Now.Date,
+                TopicoId = idTopico,
+                Msg = comentarioDto.Msg
 
-            comentario.Id = Guid.NewGuid();
-            comentario.Data = DateTime.Now.Date; // Define a data atual sem a hora
+            };
+           
 
             _context.Comentarios.Add(comentario);
             await _context.SaveChangesAsync();
@@ -38,9 +46,10 @@ namespace ForumAEVO.Controllers
 
         //PUT: api/comentarios/{idTopico}/{id}
         [HttpPut("{idTopico}/{id}")]
-        public async Task<IActionResult> PutComentario(Guid idTopico, Guid id, [FromBody] ComentarioDto comentarioDto)
+        [ProducesResponseType(204)]
+        public async Task<IActionResult> PutComentario(int idTopico, int id, [FromBody] MsgUpdateDTO comentarioUpdtade)
         {
-            var userId = GetAndValidateToken();
+             GetAndValidateToken();
             var topico = await _context.Topicos.FindAsync(idTopico);
             if (topico == null)
             {
@@ -51,7 +60,7 @@ namespace ForumAEVO.Controllers
             // Busca se o usuário "autenticado" é dono do comentário
             var comentario = await _context.Comentarios
                 .Include(c => c.Usuario)
-                .FirstOrDefaultAsync(c => c.Id == id && c.TopicoId == idTopico && c.UserId == userId);
+                .FirstOrDefaultAsync(c => c.Id == id && c.TopicoId == idTopico && c.UserId == comentarioUpdtade.UserId);
 
             if (comentario == null)
             {
@@ -59,7 +68,7 @@ namespace ForumAEVO.Controllers
             }
 
             // Atualiza o comentário
-            comentario.Msg = comentarioDto.Msg;
+            comentario.Msg = comentarioUpdtade.Msg;
 
             try
             {
@@ -77,12 +86,13 @@ namespace ForumAEVO.Controllers
                 }
             }
 
-            return Ok();
+            return NoContent();
         }
 
         // DELETE: api/comentarios/{idTopico}/{id}
         [HttpDelete("{idTopico}/{id}")]
-        public async Task<IActionResult> DeleteComentario(Guid idTopico, Guid id)
+        [ProducesResponseType(204)]
+        public async Task<IActionResult> DeleteComentario(int idTopico, int id)
         {
             var userId = GetAndValidateToken();
 
@@ -113,7 +123,7 @@ namespace ForumAEVO.Controllers
 
             return NoContent();
         }
-        private bool ComentarioExists(Guid id)
+        private bool ComentarioExists(int id)
         {
             return _context.Comentarios.Any(e => e.Id == id);
         }
