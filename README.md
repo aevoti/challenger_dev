@@ -75,10 +75,6 @@ Serão considerados pontos positivos, porém não são obrigatórios:
  1. Diferencial - Escrever testes unitarios para os endpoints;
  2. Diferencial - Utilização de documentação para o mini projeto;
  3. Diferencial - Publicação do projeto em algum ambiente online;
- 4. Diferencial - Filtragem por texto no back;
- 5. Diferencial - Ordenação dos topicos no back;
- 6. Diferencial - Design patterns e rotinas para testes;
- 7. Diferencial - Boas Práticas de orientação a objetos;
 
 
 

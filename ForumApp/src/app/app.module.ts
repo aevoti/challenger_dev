@@ -9,20 +9,29 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TopicoService } from './services/topicoService/topico.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SetOrderComponent } from 'src/components/setOrder/setOrder.component';
+import { TopicoComponent } from 'src/components/topico/topico.component';
+import { ComentarioComponent } from 'src/components/comentario/comentario.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     CreateTopicComponent,
-    SetOrderComponent
+    SetOrderComponent,
+    TopicoComponent,
+    ComentarioComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({positionClass: 'toast-bottom-right'})
   ],
   providers: [
     TopicoService

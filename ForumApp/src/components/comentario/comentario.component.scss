@@ -1,0 +1,70 @@
+.comentarioContainer{
+    margin-bottom: 10px;
+    .comentarioUserInfo{
+        display: flex;
+        gap: 8px;
+    }
+    .profilePicture{ 
+        min-width: 30px;
+        height: 30px;
+        object-fit: cover;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+    .comentarioBody{
+        width: 100%;
+        .row-op{
+            display: flex;
+            justify-content: space-between;
+        }
+        .usuario{
+            color: var(--secondaryAEVO);
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .comentarioText{
+            color: var(--textAEVO);
+            overflow-wrap: break-word;
+            word-break: break-all;
+        }
+        .editarComentario{
+            textarea{
+                width: 100%;
+                border-radius: 5px;
+                height: 80px;
+                border: 1px solid var(--borderAEVO);
+                resize: none;
+                outline: none;
+                font-size: 14px;
+                color: var(--textAEVO);
+            }
+            button{
+                border: none;
+                background-color: var(--primaryAEVO);
+                color: var(--borderAEVO);
+                border-radius: 5px;
+                transition: 0.3s;
+                font-weight: bold;
+                cursor: pointer;
+                &:disabled{
+                    cursor: default;
+                    opacity: 0.5;
+                    transition: 0.3s;
+                }
+            }
+        }
+    }
+    .delete{
+        font-size: 14px;
+        border: none;
+        background: none;
+        color: #e16832;
+    }
+    .editar{
+        font-size: 14px;
+        border: none;
+        background: none;
+        color: #ffc29e;
+    }
+}

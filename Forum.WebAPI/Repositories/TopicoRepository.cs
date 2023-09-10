@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Forum.WebAPI.Data;
 using Forum.WebAPI.Models;
 using Forum.WebAPI.Enums;
 using Microsoft.EntityFrameworkCore;
+using Forum.WebAPI.Dtos;
 
 namespace Forum.WebAPI.Repositories;
 
@@ -13,12 +10,43 @@ public class TopicoRepository : Repository<Topico>, ITopicoRepository
 {
     public TopicoRepository(ApplicationDbContext context) : base(context){ }
 
-    public Topico? GetTopicoById(int id)
+    public TopicoCompletoDTO? GetTopicoById(int id)
+    {
+        var query = _context.Topicos
+            .Include(t => t.Usuario) 
+            .Include(t => t.Comentarios)
+            .FirstOrDefault(t => t.Id == id);
+
+        if(query != null){
+            var topicosDto = new TopicoCompletoDTO
+            {
+                Id = query.Id,
+                Titulo = query.Titulo,
+                Descricao = query.Descricao,
+                DataCriacao = query.DataCriacao,
+                UsuarioId = query.UsuarioId,
+                UsuarioName = query.Usuario.Name,
+                UsuarioPhoto = query.Usuario.Photo,
+                Comentarios = query.Comentarios.Select(c => new ComentarioCompletoDTO
+                {
+                    Id = c.Id,
+                    Descricao = c.Descricao,
+                    UsuarioId = c.UsuarioId,
+                    UsuarioPhoto = c.Usuario.Photo,
+                    TopicoId = c.TopicoId
+                }).ToList()
+            };
+            return topicosDto;
+        }
+        return null;
+    }
+
+    public Topico? GetTopicoObjById(int id)
     {
         return _context.Set<Topico>()
-                        .Include(t => t.Usuario)
-                        .Include(t => t.Comentarios) 
-                        .FirstOrDefault(t => t.Id == id);
+                    .Include(t => t.Usuario) 
+                    .Include(t => t.Comentarios)
+                    .FirstOrDefault(t => t.Id == id);
     }
 
     public IEnumerable<Topico>? GetAllTopicos()
@@ -29,9 +57,19 @@ public class TopicoRepository : Repository<Topico>, ITopicoRepository
                         .ToList();
     }
 
-    public IEnumerable<Topico> GetTopicosOrdenadosEOuPesquisados(TipoDeOrdenacao ordenacao, string searchText)
+    public IEnumerable<TopicoCompletoDTO> GetTopicosOrdenadosEOuPesquisados(TipoDeOrdenacao ordenacao, string searchText)
     {
-        IQueryable<Topico> query = _context.Topicos;
+        var query = _context.Topicos
+            .Include(t => t.Usuario) 
+            .Include(t => t.Comentarios)
+            .AsQueryable();
+
+        if (!string.IsNullOrEmpty(searchText))
+        {
+            query = query.Where(t =>
+                EF.Functions.Like(t.Titulo, $"%{searchText}%") ||
+                EF.Functions.Like(t.Descricao, $"%{searchText}%"));
+        }
 
         switch (ordenacao)
         {
@@ -43,13 +81,25 @@ public class TopicoRepository : Repository<Topico>, ITopicoRepository
                 break;
         }
 
-        if (!string.IsNullOrEmpty(searchText))
+        var topicosDto = query.Select(t => new TopicoCompletoDTO
         {
-            query = query.Where(t =>
-                EF.Functions.Like(t.Titulo, $"%{searchText}%") ||
-                EF.Functions.Like(t.Descricao, $"%{searchText}%"));
-        }
+            Id = t.Id,
+            Titulo = t.Titulo,
+            Descricao = t.Descricao,
+            DataCriacao = t.DataCriacao,
+            UsuarioId = t.UsuarioId,
+            UsuarioName = t.Usuario.Name,
+            UsuarioPhoto = t.Usuario.Photo,
+            Comentarios = t.Comentarios.Select(c => new ComentarioCompletoDTO
+            {
+                Id = c.Id,
+                Descricao = c.Descricao,
+                UsuarioId = c.UsuarioId,
+                UsuarioPhoto = c.Usuario.Photo,
+                TopicoId = c.TopicoId
+            }).ToList()
+        }).ToList();
 
-        return query.ToList();
+        return topicosDto;
     }
 }

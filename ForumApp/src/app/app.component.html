@@ -1,3 +1,4 @@
-<app-header></app-header>
+<app-header (onSearch)="setSearchText($event)"></app-header>
 <app-createTopic></app-createTopic>
-<app-setOrder></app-setOrder>
+<app-setOrder (onChange)="setOrder($event)" ></app-setOrder>
+<app-topico *ngFor="let topico of topicos" [topico]="topico" (onDelete)="pesquisar()"></app-topico>

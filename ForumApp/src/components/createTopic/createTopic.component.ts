@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { TopicoService } from 'src/app/services/topicoService/topico.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class CreateTopicComponent implements OnInit {
 
   form!:FormGroup;
 
-  constructor(private fb:FormBuilder, private topicoService:TopicoService) { }
+  constructor(private fb:FormBuilder, private topicoService:TopicoService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.buildForm();
@@ -30,6 +31,24 @@ export class CreateTopicComponent implements OnInit {
       ...this.form.value,
       usuarioId: 1
     }
-    this.topicoService.createTopico(novoTopico).subscribe(topico => {console.log(topico)})
+    this.form.reset()
+    this.topicoService.createTopico(novoTopico).subscribe(
+      {
+        next: () => {
+          this.showSuccess("Tópico criado")
+        },
+        error: (err) => {
+          this.showError(err.error.title);
+        }
+      }
+      )
+  }
+
+  showSuccess(message: string) {
+    this.toastr.success(message, 'Sucesso');
+  }
+
+  showError(message: string) {
+    this.toastr.error(message, 'Erro');
   }
 }

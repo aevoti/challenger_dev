@@ -1,0 +1,52 @@
+<div class="card">
+  <div class="header">
+    <div class="titulo">
+      <i class="bi bi-chat-dots"></i> {{topico.titulo}} #{{topico.id}}
+    </div>
+    <div class="verDiscussao">
+      <p>Ver discussão completa</p>
+      <button class="delete" (click)="deletarTopico()"> Deletar <i class="bi bi-archive"></i></button>
+      <button class="editar" (click)="toggleEditMode()"> Editar <i class="bi bi-pen-fill"></i></button>
+    </div>
+  </div>
+  <p class="infoTopico">Postado em <b>{{topico.dataCriacao|date:"MM/dd/YYYY"}}</b> por <b>{{topico.usuarioName}}</b></p>
+  
+  <div class="cardBody">
+    <div *ngIf="!editMode;else editarTopico">
+      <p #descricaoElement [class.ellipsis]="toggled">{{topico.descricao}}</p>
+      <button *ngIf="descricaoElement.offsetHeight >= 80" class="expand" (click)="toggleText()">Ver mais <i class="bi bi-chevron-down"></i></button>
+    </div>
+    <ng-template #editarTopico>
+      <div class="editarTopico">
+        <textarea cols="30" rows="10" [(ngModel)]="editValue"></textarea>
+        <button [disabled]="editValue.length === 0" (click)="atualizaTopico()">Atualizar</button>
+      </div>
+    </ng-template>
+  </div>
+  <div class="infoInteracao">
+    <div class="action">
+      <i class="bi bi-hand-thumbs-up" (click)="curtir()"></i>
+      <i class="bi bi-chat-left-text"></i>
+    </div>
+    <div class="info">
+      {{topico.id}} curtidas | {{topico.comentarios.length}} comentários
+    </div>
+  </div>
+  <div class="comments">
+    <div *ngIf="!toggledVerComentarios; else todosComentarios">
+      <app-comentario *ngIf="!!topico.comentarios[0]" [comentario]="topico.comentarios[0]" (onDeleteComentario)="recarregarTopico()"></app-comentario>
+    </div>
+    <ng-template #todosComentarios>
+      <app-comentario *ngFor="let comentario of topico.comentarios" [comentario]="comentario" (onDeleteComentario)="recarregarTopico()"></app-comentario>
+    </ng-template>
+    
+    <button *ngIf="topico.comentarios.length > 1" class="expandComentarios" (click)="toggleVerComentario()">Ver {{toggledVerComentarios ? "menos" : "mais" }} comentários</button>
+  </div>
+  <div class="comentar">
+      <div class="row">
+        <img class="profilePicture" src="data:image/jpeg;base64, {{topico.usuarioPhoto}}">
+        <input maxlength="2000" [(ngModel)]="inputValueComentario" class="novoComentario" placeholder="Digite aqui seu comentário">
+        <button [disabled]="inputValueComentario.length === 0" (click)="ComentarioBody()">Comentar</button>
+      </div>
+  </div>
+</div>

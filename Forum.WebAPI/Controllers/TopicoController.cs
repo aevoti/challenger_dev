@@ -78,7 +78,7 @@ public class TopicoController : ControllerBase
     [HttpPut("topico/{id}")]
     public IActionResult Put(int id, [FromBody] TopicoDTO topicoAtualizado)
     {
-        var topicoExistente = _topicoRepository.GetTopicoById(id);
+        var topicoExistente = _topicoRepository.GetTopicoObjById(id);
 
         if (topicoExistente == null)
         {
@@ -91,7 +91,7 @@ public class TopicoController : ControllerBase
         _topicoRepository.Update(topicoExistente);
         if(_topicoRepository.SaveChanges())
         {
-            return Ok("Topico atualizado");
+            return Ok();
         }
 
         return BadRequest("Topico não atualizado");
@@ -101,7 +101,7 @@ public class TopicoController : ControllerBase
     [HttpDelete("topico/{id}")]
     public IActionResult Delete(int id)
     {
-        var topico = _topicoRepository.GetTopicoById(id);
+        var topico = _topicoRepository.GetTopicoObjById(id);
 
         if (topico == null)
         {
@@ -111,7 +111,7 @@ public class TopicoController : ControllerBase
         _topicoRepository.Remove(topico);
         if(_topicoRepository.SaveChanges())
         {
-            return Ok("Topico deletado");
+            return Ok();
         }
 
         return BadRequest("Topico não deletado");

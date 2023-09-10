@@ -1,0 +1,28 @@
+<div class="comentarioContainer">
+  <div class="comentarioUserInfo">
+    <img class="profilePicture" src="data:image/jpeg;base64, {{comentario.usuarioPhoto}}">
+    <div class="comentarioBody">
+      <div class="row-op">
+        <b class="usuario">{{comentario.usuarioNome}}</b>
+        <div>
+          <button class="editar" title="Editar Comentário" (click)="toggleEditMode()"><i class="bi bi-pen-fill"></i></button>
+          <button class="delete" title="Deletar Comentário" (click)="deletarComentario()"><i class="bi bi-trash"></i></button>
+        </div>
+      </div>
+      <div class="comentarioBody">
+        <div *ngIf="!editMode;else editarComentario">
+          <p class="comentarioText">{{comentario.descricao}}</p>
+        </div>
+        <ng-template #editarComentario>
+          <div class="editarComentario">
+            <textarea [(ngModel)]="editValue"></textarea>
+            <div style="display: flex; justify-content: end;">
+              <button [disabled]="editValue.length === 0" (click)="atualizaComentario()">Atualizar</button>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  
+</div>

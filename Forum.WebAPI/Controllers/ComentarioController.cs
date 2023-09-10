@@ -70,7 +70,7 @@ public class ComentarioController : ControllerBase
         _comentarioRepository.Update(comentarioExistente);
         if(_topicoRepository.SaveChanges())
         {
-            return Ok("Comentário atualizado");
+            return Ok();
         }
 
         return BadRequest("Comentário não atualizado");
@@ -96,7 +96,7 @@ public class ComentarioController : ControllerBase
         _comentarioRepository.Remove(comentario);
         if(_comentarioRepository.SaveChanges())
         {
-            return Ok("Comentário deletado");
+            return Ok();
         }
 
         return BadRequest("Comentário não deletado");
