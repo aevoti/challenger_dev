@@ -1,0 +1,45 @@
+.pesquisa{
+  flex: 0 0 auto;
+  position: relative;
+}
+
+.buttonPesquisa{
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 25px;
+  height: 25px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.buscarTopico {
+  padding: 10px 25px;
+  box-sizing: border-box;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 3px 6px rgba(0,0,0,.16);
+  height: 40px;
+}
+
+.buscarTopico:focus-visible {
+  outline: 1px solid #F2722A;
+  border-radius: 5px;
+  border-radius: 5px;
+}
+
+h1{
+  color: #6F6E72;
+  font-weight: 400;
+}
+
+h2 {
+  font-size: 14px;
+  color: #6F6E72;
+  padding: 24px 44px;
+  font-weight: 400;
+  margin-bottom: 0;
+}
