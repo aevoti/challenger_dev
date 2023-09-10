@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace ForumAEVO.Models
@@ -7,12 +8,13 @@ namespace ForumAEVO.Models
     public class Comentario : Forum
     {
         //A chave estrangeira que se relaciona com topico ID
-        public Guid TopicoId { get; set; } = Guid.NewGuid();
+        public int TopicoId { get; set; }
 
         // A chave estrangeira que relaciona o tópico ao usuário
-        public Guid UserId { get; set; } = Guid.NewGuid();
+        public Guid UserId { get; set; }
 
         [ForeignKey("UserId")]
+        [Required]
         [JsonIgnore] 
         public Usuario? Usuario { get; set; }
 

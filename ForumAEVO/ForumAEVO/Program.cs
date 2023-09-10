@@ -3,10 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
 builder.Services.AddControllersWithViews();
 
 var configuration = new ConfigurationBuilder()
@@ -17,7 +16,6 @@ var configuration = new ConfigurationBuilder()
 builder.Services.AddDbContext<ForumAEVO.Models.Context>(options =>
     options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-// Removendo os "Lixos $id" do retorno da API
 builder.Services.AddMvc()
     .AddJsonOptions(options =>
     {
@@ -29,7 +27,7 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new() { Title = "API Forum Aevo", Version = "v1" });
 
-    // Definindo o parâmetro de cabeçalho "Token" para autenticação
+    // Definir o parâmetro de cabeçalho "Token" para autenticação
     c.AddSecurityDefinition("Token", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
@@ -57,6 +55,14 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
+// Configuração de CORS
+app.UseCors(options =>
+{
+    options.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader();
+});
+
 
 if (app.Environment.IsDevelopment())
 {
@@ -64,8 +70,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Minha Aplicação v1");
+        c.RoutePrefix = "";//definindo o swagger como pagina principal
     });
 }
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

@@ -11,7 +11,7 @@ namespace ForumAEVO.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("Id")]
         [JsonIgnore]
-        public Guid Id { get; set; } = Guid.NewGuid();//Guid armazena o UUID como número 
+        public Guid Id { get; set; } = Guid.NewGuid();//Guid armazena o UUID como número hexadecimal
 
         [Required]
         [MaxLength(100)]

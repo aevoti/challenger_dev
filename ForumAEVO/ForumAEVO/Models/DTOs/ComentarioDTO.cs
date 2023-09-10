@@ -5,11 +5,13 @@ namespace ForumAEVO.Models.DTOs
     public class ComentarioDto
     {
        
-        public Guid Id { get; set; }
-        public Guid TopicoId { get; set; }
-        public Guid UserId { get; set; }
-        public string Msg { get; set; } =string.Empty;
+        public int Id { get; set; }
+        public int TopicoId { get; set; }
         [JsonIgnore]
+        public Guid UserId { get; set; }
+        public string DonoDaPostagem { get; set; } = string.Empty;
+        public string Foto { get; set; }= string.Empty;
+        public string Msg { get; set; } =string.Empty;
         public string Data { get; set; } = string.Empty;
     }
 

@@ -59,7 +59,7 @@ namespace ForumAEVO.Controllers
                 usuario.Id = Guid.NewGuid();
                 _context.Add(usuario);
                 await _context.SaveChangesAsync();
-                return CreatedAtAction(nameof(Get), new { id = usuario.Id }, usuario);
+                return CreatedAtAction("GetUsuario", new { id = usuario.Id }, usuario);
             }
             return BadRequest(ModelState);
         }
@@ -116,19 +116,33 @@ namespace ForumAEVO.Controllers
         }
 
 
+
         // DELETE: api/usuarios/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(204)]
         public async Task<IActionResult> Delete(Guid id)
         {
+            // buscando os topicos que o usuário fez
+            var topicsToDelete = await _context.Topicos
+                .Where(t => t.UserId == id)
+                .ToListAsync();
+
+            
+            _context.Topicos.RemoveRange(topicsToDelete);
+
+            // deletando o usuario sem problemas
             var usuario = await _context.Usuarios.FindAsync(id);
             if (usuario == null)
             {
                 return NotFound();
             }
             _context.Usuarios.Remove(usuario);
+
             await _context.SaveChangesAsync();
+
             return NoContent();
         }
+
 
         private bool UsuarioExists(Guid id)
         {

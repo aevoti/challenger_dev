@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ForumAEVO.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230904125015_DataEmForum")]
-    partial class DataEmForum
+    [Migration("20230908135840_InicioForumAevo")]
+    partial class InicioForumAevo
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,10 +27,12 @@ namespace ForumAEVO.Migrations
 
             modelBuilder.Entity("ForumAEVO.Models.Comentario", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("int")
                         .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime2");
@@ -41,8 +43,8 @@ namespace ForumAEVO.Migrations
                         .HasColumnType("nvarchar(2000)")
                         .HasColumnName("Mensagem");
 
-                    b.Property<Guid>("TopicoId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("TopicoId")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -58,10 +60,12 @@ namespace ForumAEVO.Migrations
 
             modelBuilder.Entity("ForumAEVO.Models.Topico", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("int")
                         .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime2");

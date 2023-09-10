@@ -5,7 +5,8 @@ namespace ForumAEVO.Models.DTOs
     public class TopicoDto
     {
         [JsonIgnore]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
+       
         public Guid UserId { get; set; }
         public string Msg { get; set; } = string.Empty;
         [JsonIgnore] 
