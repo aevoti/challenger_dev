@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\ForumAEVO",
+    "\\ForumAEVO\\ForumAEVO",
+    "\\ForumAEVO\\ForumAEVO\\Models"
   ],
   "PreviewInSolutionExplorer": false
 }
