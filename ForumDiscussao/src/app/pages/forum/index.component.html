@@ -1,0 +1,59 @@
+
+<div class="container">
+    
+    <h1 class="title">Fórum de Discussão</h1>
+    <div class="right row" >
+        <span class="p-input-icon-right">
+            <i class="pi pi-search"></i>
+            <input placeholder="Busque um tópico" type="text" pInputText (keydown.enter)="pesquisarTopico()" [(ngModel)]="textPesquisa"/>
+        </span>
+    </div>
+    <div class="subtitulo">
+        <p>Este é um espaço onde você pode participar de discussões, trocar informações, fazer perguntas, compartilhar opiniões e interagir com outras pessoas que têm interesses semelhantes.</p>
+    </div>
+    <div class="row newTopic">
+        
+        <label style="margin-left: 120px;" for="iNewTopic"><b>Digite aqui o que deseja compartilhar com a empresa:</b></label>
+        <div class="col-12" style="display: block;">
+            <img class="col-3" src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Descrição da imagem">
+            <textarea class="col-10" pInputTextarea [(ngModel)]="newTopic" placeholder="O que eu quero compartilhar agora?" id="iNewTopic" rows="4" cols="100"></textarea>
+        </div>
+        <div class="right">
+            <p-button class="col-1" (click)="postTopico()">Criar tópico</p-button>
+        </div>
+        
+    </div>
+    <div style="text-align:right">
+        <p-dropdown [options]="lstOrdenacao" [(ngModel)]="ordenacaoSelecionada" optionLabel="name" (onChange)="pesquisarTopico()"></p-dropdown>
+    </div>
+    <ng-container *ngFor="let item of topics" class="post">
+        <div class="post">
+            
+            <div class="row ml-3">
+                <div class="col-6">
+                    <h6 class="infoTopic col-5 ">Tópico para Discussão: #{{item.id}}</h6>
+                </div>
+                <div class="right col-6">
+                    <a  (click)="deleteTopico(item.id)" class="pi pi-trash col-1"></a>
+                    <a  (click)="showDialog(item.dsc,item.id)" class="pi pi-pencil col-1"></a>
+                </div>
+            </div>
+
+            <div class="row">
+                <p class="headerTopic">Postado em <b>{{item.data}}</b> por <b>{{item.idUsu}}</b></p>
+            </div>
+            <div class="row">
+                <p>{{item.dsc}}</p>
+            </div>
+            <!-- <p-button (click)="getComent(item.id)" label="Deletar Tópico" styleClass="p-button-danger"></p-button> -->
+            <div class="card flex justify-content-center">                
+                <p-dialog class="col-12" header="Header" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false" rows="4" cols="100">
+                    <textarea class="col-6 m-0" pInputTextarea  [(ngModel)]="textUpdate"></textarea>
+                    <p-button (click)="updateTopico()" icon="pi pi-external-link" label="Atualizar"></p-button>
+                </p-dialog>
+            </div>
+        </div>
+        <comentario [idTopico]="item.id"></comentario>
+    </ng-container>
+</div>
+

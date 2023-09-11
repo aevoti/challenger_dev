@@ -1,0 +1,53 @@
+.container {
+    font-family: 'Nunito', Regular;
+    color: #6F6372;
+    // background-color: white;
+}
+.mostrar{
+    text-align: end;
+    display: block;
+}
+
+.mostrar button{
+    text-align: end;
+}
+.right{
+    text-align: end;
+}
+.newComent p-button{
+    color: white !important;
+    border-radius: 10%;
+    border-color: none;
+    margin-left: 1%;
+    border-radius: 50%;
+}
+.newComent input {
+    border-radius: 2%;
+}
+img {
+    border-radius: 50%;
+    width: 60px; /* Ajuste a largura da imagem conforme necessário */
+    height: 40px; /* Ajuste a altura da imagem conforme necessário */
+}
+
+.post {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: 'Nunito', Regular;
+    background-color: #E5E5E5;
+}
+
+.btnOrange{
+    color: #F2722A;
+}
+
+:host ::ng-deep .p-button{
+    background-color: #F2722A;
+}
+
+a{
+    cursor: pointer;
+    text-align: right;
+}

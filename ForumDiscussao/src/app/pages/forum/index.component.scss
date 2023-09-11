@@ -1,0 +1,119 @@
+.title{
+    color: #6f6E72;
+}
+
+body {
+    font-family: 'Nunito', Regular;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+
+nav {
+    background-color: #444;
+    padding: 10px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+.subtitulo{
+    border: 3px solid #FDE3D4;
+    border-radius: 5px;
+
+}
+
+.container {
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family:  'Nunito', Regular;
+    // background-color: white;
+}
+
+h1 {
+    color: #333;
+}
+
+.post {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: 'Nunito', sans-serif;
+}
+
+.headerTopic{
+    color: #F2722A;
+}
+.infoTopic{
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.post h2 {
+    color: #333;
+}
+
+.newTopic{
+    color: #F2722A;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+
+}
+.post .user {
+    font-weight: bold;
+}
+
+img {
+    border-radius: 50%;
+    width: 120px; /* Ajuste a largura da imagem conforme necessário */
+    height: 80px; /* Ajuste a altura da imagem conforme necessário */
+}
+
+.post .date {
+    color: #888;
+}
+.post a{
+    cursor: pointer;
+    text-align: right;
+}
+
+.right{
+    text-align: end;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+textarea {
+    resize: none;
+  }
+
+.card{
+    align-self: flex-end;
+}
+
+
+:host ::ng-deep .p-button{
+    background-color: #F2722A;
+}
