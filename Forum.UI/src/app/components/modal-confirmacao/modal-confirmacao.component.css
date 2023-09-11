@@ -1,0 +1,17 @@
+.botaoConfirmar{
+    background-color: var(--color-primaria-aevo);
+    color: white;
+    font-family: 'Nunito Sans Bold', sans-serif;
+    font-weight: bold;
+    font-size: 15px !important;
+    padding: 2px 8px;
+}
+
+.botaoCancelar{
+    background-color: var(--color-aevo-texto);
+    color: white;
+    font-family: 'Nunito Sans Bold', sans-serif;
+    font-weight: bold;
+    font-size: 15px !important;
+    padding: 2px 8px;
+}

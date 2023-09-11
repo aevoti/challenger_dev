@@ -1,0 +1,15 @@
+.custom-header {
+  color: var(--color-aevo-texto);
+}
+
+.custom-paragraph {
+  border: 1px solid var(--color-primaria-aevo-50);
+  border-radius: 10px;
+  background-color: var(--color-aevo-texto-20);
+  padding: 10px;
+}
+
+.corpo-forum {
+  padding-left: 237px;
+  padding-right: 237px;
+}

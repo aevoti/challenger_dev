@@ -1,0 +1,20 @@
+<div class="col mx-5 my-5">
+  <div class="shadow p-1">
+    <div class="p-3">
+      <div class="row">
+        <div class="col-auto align-self-center">
+          <img class="usuario-foto" src="/assets/icons/avatar-padrao.png" alt="Imagem do usuário">
+        </div>
+        <div class="col">
+          <h2>Digite aqui o que deseja compartilhar com a empresa:</h2>
+          <textarea class="form-control mb-3 custom-input" rows="3" placeholder="O que eu quero compartilhar agora?" [(ngModel)]="novoTopico.conteudo" (input)="atualizarClasseBotao()"></textarea>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end">
+        <button class="btn" [class.ativo]="botaoClasse === 'ativo'" [class.inativo]="botaoClasse === 'inativo'" (click)="cadastrarTopico()">
+          <i class="fa-regular fa-comments"></i> Criar tópico
+        </button>
+      </div>      
+    </div>
+  </div>
+</div>

@@ -1,0 +1,122 @@
+<div class="d-flex justify-content-between align-items-center mx-5 my-3" *ngIf="topicos && topicos.length > 0">
+  <div class="search">
+    <div class="input-group">
+      <div class="input-wrapper">
+        <input type="text" class="form-control search-input" placeholder="Busque um tópico" [(ngModel)]="pesquisa"
+          (keyup.enter)="obterTopicos()">
+        <i class="fa fa-search icon-search" (click)="obterTopicos()"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="ordenacao">
+    <div class="d-flex align-items-center">
+      <div class="ordenacao-texto" style="margin-right: 10px;">
+        <span>Ordenar por:</span>
+      </div>
+      <div class="form-group">
+        <select class="form-control" [(ngModel)]="ordenacao" (change)="obterTopicos()">
+          <option value="DESC"><span>Mais recentes</span></option>
+          <option value="ASC"><span>Mais antigos</span></option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="topicos m-5">
+  <div class="topico card my-5 p-3" *ngFor="let topico of topicos">
+    <div class="d-flex justify-content-between">
+      <div>
+        <h3 class="topico">Tópico para discussão #{{ topico.id }}</h3>
+      </div>
+      <div class="ml-auto">
+        <a href="javascript:void(0);" class="link" (click)="obterTopicoPorId(topico)">Ver discussão completa</a>
+        <div ngbDropdown class="d-inline-block">
+          <i class="fa-solid fa-ellipsis-vertical dropdown-toggle" ngbDropdownToggle></i>
+          <div ngbDropdownMenu>
+            <button ngbDropdownItem (click)="editarTopico(topico)">Editar</button>
+            <button ngbDropdownItem (click)="excluirTopico(topico.id)">Deletar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h4>Postado em <b>{{ topico.dataHoraPostagem | date:'dd/MM/yyyy' }}</b> por <b>{{ topico.usuarioNome }}</b></h4>
+    <div>
+      <p> {{ topico.expandido ? topico.conteudo : cortarTexto(topico.conteudo, 300) }} </p>
+
+      <span *ngIf="topico.conteudo.length > 300">
+        <span *ngIf="!topico.expandido">
+          <a href="javascript:void(0);" class="link" (click)="topico.expandido = true">Ver mais</a>
+        </span>
+      </span>
+
+      <hr class="card-divisor">
+
+      <div class="d-flex justify-content-between">
+        <div class="botoes">
+          <i class="icon-topico fa-regular fa-thumbs-up" [ngClass]="{'marked': topico.topicoCurtido}"
+            (click)="curtirOuDescurtirTopico(topico)"
+            style="cursor: pointer; margin-left: 15px !important; margin-right: 50px !important;"></i>
+
+          <i class="icon-topico fa-regular fa-message" [ngClass]="{'marked': topico.areaComentarioExpandido}"
+            (click)="toggleComentario(topico)" style="cursor: pointer;"></i>
+        </div>
+
+        <div class="contadores">
+          <span>{{ topico.curtidas.length }} curtidas | </span>
+          <span>{{ topico.comentarios.length }} comentários</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div>
+      <div class="my-1">
+        <div class="comentario-container" *ngIf="topico.areaComentarioExpandido && topico.comentarios.length > 0">
+          <div class="seta"></div>
+          <div class="comentario">
+            <div class="d-flex justify-content-between">
+              <div>
+                <div class="d-flex align-items-center">
+                  <img class="usuario-foto-comentario" src="/assets/icons/avatar-padrao.png" alt="Imagem do usuário">
+                  <span class="usuario-nome">{{ topico.comentarios[0].usuarioNome }}</span>
+                </div>
+                <div style="padding-left: 40px;">
+                  <span>{{ topico.comentarios[0].conteudo }}</span>
+                </div>
+              </div>
+              <div ngbDropdown class="d-inline-block">
+                <i class="fa-solid fa-ellipsis-vertical dropdown-toggle" ngbDropdownToggle></i>
+                <div ngbDropdownMenu>
+                  <button ngbDropdownItem
+                    (click)="editarComentario(topico.comentarios[0], topico.id, tokenUsuarioId)">Editar</button>
+                  <button ngbDropdownItem
+                    (click)="excluirComentario(topico.comentarios[0], topico.id, tokenUsuarioId)">Deletar</button>
+                </div>
+              </div>
+            </div>
+            <div class="mt-1">
+              <a href="javascript:void(0);" class="link" (click)="obterComentariosPorTopico(topico.comentarios)"
+                *ngIf="topico.comentarios.length > 1">Ver mais comentários</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column mt-5" *ngIf="topico.areaComentarioExpandido">
+          <div class="novoComentario justify-content-between">
+            <img class="usuario-foto-novo-comentario" src="/assets/icons/avatar-padrao.png" alt="Imagem do usuário">
+            <div class="novoComentarioInput">
+              <span class="caracteresRestantes"> {{ topico.caracteresRestantes }} caracteres restantes</span>
+              <input type="text" class="form-control custom-input" maxlength="2000"
+                placeholder="Digite aqui seu comentário" [(ngModel)]="topico.novoComentario"
+                (input)="atualizarEValidarComentario(topico)">
+            </div>
+            <button class="btn" [class.ativo]="botaoClasse === 'ativo'" [class.inativo]="botaoClasse === 'inativo'"
+              (click)="cadastrarComentario(topico.id, topico.novoComentario)">Comentar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

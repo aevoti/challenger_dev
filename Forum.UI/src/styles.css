@@ -1,0 +1,145 @@
+@import url('file:///C:/Projects/ForumFront/Forum.UI/src/assets/fontawesome/css/all.min.css');
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+.logo-aevo {
+  width: 119.5px;
+  height: auto;
+}
+
+html {
+  font-size: 14px;
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  height: 60px;
+  line-height: 60px;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 88vh;
+}
+
+h1 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 25.5px !important;
+  color: var(--color-aevo-texto);
+}
+
+h2 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px !important;
+  color: var(--color-primaria-aevo);
+  font-weight: bold;
+}
+
+h3 {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px !important;
+  color: var(--color-aevo-texto);
+  border: 1px solid var(--color-aevo-texto);
+  border-radius: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+h4 {
+  font-family: 'Nunito Sans Light', sans-serif;
+  font-size: 14px !important;
+  font-style: italic;
+  color: var(--color-primaria-aevo) !important;
+}
+
+p {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 15px !important;
+  color: var(--color-aevo-texto);
+}
+
+span {
+  font-family: 'Nunito Sans', sans-serif;
+  color: var(--color-aevo-texto);
+}
+
+.ativo {
+  background-color: var(--color-primaria-aevo);
+  color: white;
+  font-family: 'Nunito Sans Bold', sans-serif;
+  font-weight: bold;
+  font-size: 15px !important;
+  padding: 2px 8px;
+}
+
+.inativo {
+  background-color: var(--color-primaria-aevo-50);
+  color: white;
+  font-family: 'Nunito Sans Bold', sans-serif;
+  font-weight: bold;
+  font-size: 15px !important;
+  padding: 2px 8px;
+}
+
+.inativo:hover,
+.inativo:active,
+.inativo.focus {
+  background-color: var(--color-primaria-aevo-50) !important;
+  color: white !important;
+}
+
+.ativo:hover,
+.ativo:active,
+.ativo:focus {
+  background-color: var(--color-primaria-aevo-10) !important;
+  color: white !important;
+}
+
+.fa-ellipsis-vertical::after {
+  display: none !important;
+}
+
+.dropdown-toggle {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+:root {
+  --color-aevo-texto: #6F6E72;
+  --color-aevo-texto-20: rgba(229, 229, 229, 0.2);
+  --color-primaria-aevo: #F2722A;
+  --color-primaria-aevo-50: #F8B894;
+  --color-primaria-aevo-10: #D96626;
+  --color-borda: #E5E5E5;
+}
