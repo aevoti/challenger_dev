@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="mostrar row">
+        <button (click)="getComent()" type="button" class="btn btn-link col-4">Mostrar comentários</button>
+    </div>
+   
+    
+    <div class="row">
+        <ng-container *ngFor="let item of coments" class="post col-12">
+            <div class="post">
+                <div class="row" >
+                    <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Descrição da imagem">
+                    <p style="padding-top: 3px; color: #333137;" class="col-10"><b>Nome do usuário (não implementado)</b></p>
+                </div>
+                <div class="row">
+                    <p>{{item.dsc}}</p>
+                </div>
+
+              
+                <div class="row">
+                    <div class="col-6"></div>
+                    <div class="right col-6">
+                        <a  (click)="deleteComent(item.id)" class="pi pi-trash col-11"></a>
+                        <a  (click)="showDialog(item.dsc,item.id)" class="pi pi-pencil col-1"></a>
+                    </div>
+                </div>
+                
+                <!-- <p-button (click)="showDialog(item.dsc,item.id)" icon="pi pi-external-link" label="Atualizar"></p-button>
+                <p-button (click)="deleteComent(item.id)" label="Deletar Tópico" styleClass="p-button-danger"></p-button> -->
+                <div class="card flex justify-content-center">                
+                    <p-dialog header="Header" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false" rows="4" cols="100">
+                        <textarea pInputTextarea style="height: 243px;width: 905px;"class="m-0" [(ngModel)]="textUpdate"></textarea>
+                        <p-button (click)="updateComent(item.id)" icon="pi pi-external-link" label="Atualizar"></p-button>
+                    </p-dialog>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <div class="newComent row">
+        <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Descrição da imagem">
+        <input class="col-10" pInputText [(ngModel)]="dsc" placeholder="Digite aqui seu comentário" id="iNewTopic">
+        <p-button  class="btnOrange col-1" (click)="postComent()" label="Comentar" ></p-button>
+    </div>
+
+</div>
