@@ -1,93 +1,55 @@
-
-# Task - Prática
-
-Olá! 👋
-Primeiramente, parabéns por ter chegado até aqui! Essa tem sido uma jornada seletiva de altíssimo nível, você se destacou na Etapa de Cadastro e não temos dúvidas de que irá brilhar neste desafio!
-E como funcionará a Task Prática?
- 
-Dividimos em duas etapas, para que você possa aplicar seus conhecimentos e práticas, em cada uma das frentes de desenvolvimento.
-O desafio consiste em uma pequena implementação para avaliarmos seu conhecimento em Back-End (.NET, C#) e Front-End (HTML5, CSS, JavaScript e Angular)
-
-Para realizá-lo, você deverá dar um fork neste repositório e depois cloná-lo em alguma pasta de sua preferência, na máquina que estiver realizando o teste.
-Crie um branch com seu nome a partir da master e, quando finalizar todo o desenvolvimento, você deverá enviar um pull-request com sua versão.
-
-Caso precise consultar algum material de apoio, recomendamos:<br>
-Para o back: https://www.macoratti.net/19/10/ang7_apinc1.htm<br>
-Para o front: https://www.youtube.com/@loianegroner <br>
-
 # O Desafio
+Antes de começar a resolver o desafio, foram desenhados dois diagramas para facilitar o desenvolvimento do projeto. 
+O Primeiro diagrama é da classe do projeto que ficou da seguinte maneira: 
+![Diagrama de classe](./imagemMd/diagrama%20de%20clase%20Forum%20Aevo.png)
+
+Já das configurações do banco de dados e suas interações entre as chaves foi feito assim:
+![Diagrama de classe](./imagemMd/BancoForum.png) 
+
 ## Back-End/.NET
-A primeira etapa será o desenvolvimento back-end!
+O projeto foi desenvolvido em um projeto MVC do .Net Core 6 e está hospedado na azure no link https://forumaevo20230910184902.azurewebsites.net. Foram criadas rotas para os usuarios de maneira simplificada, tentando seguir ao máximo o modelo especificado. A única alteração foi feita no campo Id que recebeu o tipo UUID. Essa decisão foi tomada para colocar alguma segurança nas rotas, além disso o SQL Server armazena-o como um arquivo hexadecimal. existem três usuários de testes cadastrado, mas fique a vontade para criar o seu, o usuários com seu e-mail suas id que pode ser utilizadas para autenticação:
+```json
+ {"email":"joao_silva@email.com", "id":"87940dee-496c-42f6-a0a7-0246d5eec248"}, 
+ {"email":"maria_santos@email.com","id":"f1a29d0f-72a6-4c9a-bd50-b3004d3f776b"},
+ {"email":"carlos_pereira@email.com  ","id":"b66aeead-6347-4e6b-8c41-33d2763b8a6e"} 
 
-Descrição:
+```
+como ficou configurada a classe de usuário:
+```json
+{
+    Id: Guid;
+    Nome: string;
+    Email: string;
+    Foto: string;
+}
+````
+# Rotas
+As rotas foram documentadas exibindo os dados de entrada e seus retornos. Na documentação do Swagger foi adicionado um campo para inserir o Token "fake" que é o Id do Usuário, mas nada impede de as requisições sejam feitas pelo Postman ou qualquer outro software. Para utilizar as rotas que precisam de autenticação basta ir no Header adicionar uma variavel com nome de Token e seu valor.
 
-O Objetivo dessa etapa é criar apis para um fórum onde um usuário pode fazer o CRUD básico de um tópico e realizar comentários dentro desse tópico, como uma discussão. A parte referente aos usuários não precisa ser implementado, podendo mockar os dados no front ou no back de acordo com a sua preferencia, sugerimos utilizar a seguinte estrutura para usuários:
-
-    {
-	    Id: int;
-	    Nome: string;
-	    Email: string;
-	    Foto: string;
-    }
-
-**Obrigatorio**  - Você deverá desenvolver as seguintes rotas em .Net Core(Versão de sua preferencia):
-
-    /forum - [GET] - Deve Retornar todos os topicos enviados
-    /topico/{id} - [GET] - Deve retornar um topico com id especificado
-    /topico - [POST] - Deve cadastrar um novo topico
-    /topico/{id} - [PUT] - Deve atualizar um topico com o id especificado
-    /topico/{id} - [DELETE] - Deve deletar um topico com o id especificado
-    /comentario/{idTopico} - [POST] - Deve cadastrar um novo comentario no topico de id especificado
-    /comentario/{idTopico}/{id} - [PUT] - Deve atualizar um comentario com o id especificado (Se o usuário for autor do comentario)
-    /comentario/{idTopico}/{id} - [DELETE] - Deve deletar um comentario com o id especificado (Se o usuário for autor do comentario)
-
-Você pode utilizar um banco de dados local SQL Server para a persistência dos dados.
+Caso deseje executar o projeto em sua máquina, clone o repositório, utilize a pasta ForumAevo e altere a variável do banco de dados no arquivo appsettings.Development.json o projeto irá abrir no seu navegador. Como foi dito antes nada te impede de usar o Postman ou outro software para acessar as rotas
 
 ## Front-End /Angular
-Para a segunda etapa do teste, você deverá desenvolver uma SPA (Single Page Application) utilizando Angular. Nela, deverá ser possível:
+No front-End foi utilizado o angular versão 16.2 e o angular material, não tenho muita experiência com front tentei chegar o mais próximo possível da página solicitada.
 
-**Obrigatorio**  - Você deverá desenvolver no minimo uma tela com as seguintes funcionalidades:
+Para executar o projeto clone o repositório e utilize a pasta ForumAevoFront, execute o seguinte comando:
 
-- Ver lista de tópicos
-- Criar tópico
-- Editar um tópico existente
-- Excluir um tópico existente
-- Ordenar os tópicos existentes (Data Crescente e Decrescente) 
-- Pesquisar um tópico (Conteúdo do texto do tópico)
-- Criar comentário
-- Editar comentário
-- Excluir comentário
-- Visualizar um tópico e seus comentários
+### Atualização
+Por algum motivo a pasta do front não que subir junto ao backend, então upei ele em um dirtóerio separado que encontrasse no link:
+https://github.com/Tadeujr/ForumAevoFront
 
-Seguindo o exemplo:
-![image](https://github.com/aevoti/challenger_dev/assets/13247527/f6a63f36-aab0-4422-b92f-da8c2da48a4a)
-![image](https://github.com/aevoti/challenger_dev/assets/13247527/fd47382f-db77-4dcf-ab83-0aa9885cc0e0)
-![image](https://github.com/aevoti/challenger_dev/assets/13247527/25c7520d-bcdf-4253-ab3d-370ae583b130)
-![image](https://github.com/aevoti/challenger_dev/assets/13247527/de1cd467-1bf2-4567-9aff-48a188fe18d0)
+`$ npm i`
 
+para instalar as dependencias do javascript.
 
-### Observações importantes:
-Você pode desenvolver o front na sua versão do Angular de preferência, se atentando para utilizar uma versão superior ou igual a 6.<br>
-Você pode modelar as classes de comentário e de tópicos da forma que achar mais conveniente para o desenvolvimento.<br>
-Você pode fazer adequações no front visando melhorar a experiencia do usuário, mas tente manter o mais fidedigno ao protótipo.<br>
-Você pode usar ferramentas de automação, mas deverá informar o uso completo para funcionamento do desafio.<br><br>
+E para executar o projeto no angular execute:
 
-Serão considerados pontos positivos, porém não são obrigatórios: 
+`$ ng serve`
 
- 1. Diferencial - Escrever testes unitarios para os endpoints;
- 2. Diferencial - Utilização de documentação para o mini projeto;
- 3. Diferencial - Publicação do projeto em algum ambiente online;
- 4. Diferencial - Filtragem por texto no back;
- 5. Diferencial - Ordenação dos topicos no back;
- 6. Diferencial - Design patterns e rotinas para testes;
- 7. Diferencial - Boas Práticas de orientação a objetos;
+Do front apenas conseguir desenvolver um get nos comentários utilizando a api hospedada no azure, como pode ser visto nas imagens:
 
-<br>
-
-Qualquer problema ou dificuldade com o repositório, você pode entrar em contato conosco pelos e-mails, carlos.pedroni@aevo.com.br ou rh@aevo.com.br para que possamos sanar todas as dúvidas!
-<br><br>
-Estamos sempre em busca de melhoria. Por isso, caso tenha alguma sugestão, fique à vontade para compartilhar conosco! Boa sorte! 💛
+![Diagrama de classe](./imagemMd/imagemFront1.png) 
 
 
 
 
+![Diagrama de classe](./imagemMd/imagemFront2.png) 
