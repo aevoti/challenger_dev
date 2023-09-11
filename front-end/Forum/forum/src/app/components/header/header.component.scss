@@ -1,0 +1,42 @@
+.input-box{
+    position: relative;
+  }
+  
+  .input-box i {
+    position: absolute;
+    right: 13px;
+    top:15px;
+    color:#ced4da;
+  
+}
+
+.form-control{
+
+    height: 50px;
+    background-color:#eeeeee69;
+  }
+  
+  .form-control:focus{
+    background-color: #eeeeee69;
+    box-shadow: none;
+    border-color: #eee;
+  }
+
+.fa fa-search{
+    width: 40px;
+    height: 40px;
+}
+
+.user-avatar {
+  width: 40px; /* Largura desejada para a foto do usuário */
+  height: 40px; /* Altura desejada para a foto do usuário */
+  border-radius: 50%; /* Para criar uma imagem redonda */
+  overflow: hidden; /* Para ocultar qualquer parte da imagem fora do espaço reservado */
+}
+
+.user-avatar img {
+  width: 100%; /* Preencher todo o espaço do elemento div */
+  height: 100%;
+  object-fit: cover; /* Para manter a proporção da imagem e preencher o espaço disponível */
+}
+

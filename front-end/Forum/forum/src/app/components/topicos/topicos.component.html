@@ -1,0 +1,22 @@
+<li *ngFor="let topico of topicos; let i = index">
+    
+    <div class="profile-card" style="display: flex; flex-direction: column;">
+        <div class="topicoTitulo">
+            <p>Topico para discussao # {{ i + 1 }}</p>
+        </div>
+        <label style="align-self: flex-start; margin: 5px;">
+            <em>Postado em</em>
+            <strong><span style="margin-left: 5px;">{{ topico.horaCriacao | date: 'dd/MM/yyyy HH:mm:ss' }}</span></strong>
+            <em><span style="margin-left: 5px;">por</span></em>
+            <strong><span style="margin-left: 5px;">{{ topico.usuario.nome }}</span></strong>
+          </label>
+        <p>{{topico.titulo}}</p>
+             
+        <!-- Linha horizontal de 100% de largura -->
+        <hr style="width: 100%; border: none; height: 1px; background-color: #000;">
+       
+        <app-comentarios [topicoId]="topico.id"></app-comentarios>
+    </div>
+</li>
+
+

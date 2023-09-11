@@ -1,0 +1,52 @@
+
+<li *ngFor="let comentario of comentarios">
+    
+    <div class="profile-container" style="margin-top:40px">
+        <div class="profile-image">
+            <!-- Coloque sua imagem de perfil aqui -->
+            <div class="user-avatar">
+                <img src="../../../assets/istockphoto-1344025637-612x612.jpg"
+                    alt="Foto do usuário">
+            </div>
+        </div>
+        <div class="profile-details">
+            <form #topicosForm="ngForm" (ngSubmit)="onComentarioCreate(topicosForm.value)" class="inputArea">
+                <div style="margin-left:20px">
+                    <p>{{comentario.texto}}</p>
+                </div>
+
+            </form>
+        </div>
+        <!-- Botão de Edição com ID -->
+        <button (click)="editarComentario(comentario.id, comentario.topicoId)">Editar</button>
+    </div>
+</li>
+
+<div class="profile-container" style="margin-top:40px;">
+
+    <div class="profile-image" style="margin-right:20px;">
+        <!-- Coloque sua imagem de perfil aqui -->
+        <div class="user-avatar">
+            <img src="../../../assets/istockphoto-1344025637-612x612.jpg"
+                alt="Foto do usuário">
+        </div>
+    </div>
+    <div class="profile-details">
+        <form #comentarioForm="ngForm" (ngSubmit)="onComentarioCreate(comentarioForm.value)" class="inputArea">
+            
+            <div class="textarea-container">
+                
+                <textarea placeholder="Nome" class="form-control" rows="4" [(ngModel)]="comentarioValue" name="text"
+                    class="inputArea"></textarea>
+                    <input type="hidden" name="topicoId" [(ngModel)]="topicoId">
+                <button class="btn btn-primary"
+                    [ngStyle]="{'background-color': isComentarioEmpty() ? '#F8B894' : '#F2722A'}">
+                    <img src="../../../assets/bubble-chat_2076218.png" style="width: 20px;"> Comentar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
