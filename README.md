@@ -2,8 +2,7 @@
 # Task - Prática
 
 Olá! 👋
-Primeiramente, parabéns por ter chegado até aqui! Essa tem sido uma jornada seletiva de altíssimo nível, você se destacou na Etapa de Cadastro e não temos dúvidas de que irá brilhar neste desafio!
-E como funcionará a Task Prática?
+Primeiramente, parabéns por ter chegado até aqui! Essa tem sido uma jornada seletiva de altíssimo nível.E como funcionará a Task Prática?
  
 Dividimos em duas etapas, para que você possa aplicar seus conhecimentos e práticas, em cada uma das frentes de desenvolvimento.
 O desafio consiste em uma pequena implementação para avaliarmos seu conhecimento em Back-End (.NET, C#) e Front-End (HTML5, CSS, JavaScript e Angular)
