@@ -1,0 +1,142 @@
+hr {
+    width: 100%;
+    border: none;
+    height: 2px; /* Você pode ajustar a altura conforme necessário */
+    background-color: #000; /* Cor do traço do hr */
+}
+
+
+
+
+.card-container {
+    width: 95%;
+    margin: 0 auto; /* Centraliza horizontalmente */
+    margin-top: 20px;
+    font-size: 12px;
+  }
+
+.card {
+    background-color: #FDF1E9; /* Cor de fundo */
+    border: 2px solid #F8B894; /* Cor da borda */
+    border-radius: 10px; /* Adicione bordas arredondadas, se desejar */
+    
+  }
+  .card p{
+    color: #6F6E72;
+    font-size: 20px;
+  }
+
+  .profile-card {
+    width:  95%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+  }
+  
+  h5{
+    color: #F2722A;
+    
+    font-weight: var(--fontWeight-nunito-regular);
+  }
+ 
+  .profile-details {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .inputArea{
+    width: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 50px;
+  }
+  
+  .form-control {
+    width: calc(100% - 0px);
+    margin-bottom: 10px;
+    padding: 30px;
+    border: 1px solid #ccc;
+    line-height: 1.5;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .btn {
+    width: 100%;
+    max-width: 150px;
+    align-self: flex-end;
+    height: 30px; /* Altura reduzida do botão */
+    padding: 5px 5px; /* Adiciona um padding vertical ao botão */
+    line-height: 20px; /* Centraliza verticalmente o texto */
+    background-color: #F8B894;
+    border: #E5E5E5;
+    margin-top:20px;
+  }
+
+
+
+hr {
+  width: 100%;
+  border: none;
+  height: 2px; /* Você pode ajustar a altura conforme necessário */
+  background-color: #000; /* Cor do traço do hr */
+}
+
+.user-avatar {
+  width: 50px; /* Largura desejada para a foto do usuário */
+  height: 50px; /* Altura desejada para a foto do usuário */
+  border-radius: 50%; /* Para criar uma imagem redonda */
+  overflow: hidden; /* Para ocultar qualquer parte da imagem fora do espaço reservado */
+}
+
+.user-avatar img {
+  width: 100%; 
+  height: 100%;
+  object-fit: cover; 
+ 
+}
+.profile-image {
+  max-width: 150px; 
+  height: auto; 
+  display: block; 
+  margin: 0 auto; 
+  border-radius: 50%;
+    margin-right: 2px;
+}
+
+.btn2 {
+  width: 100%;
+  max-width: 150px;
+  align-self: flex-end;
+  height: 30px; /* Altura reduzida do botão */
+  padding: 5px 5px; /* Adiciona um padding vertical ao botão */
+  line-height: 20px; /* Centraliza verticalmente o texto */
+  background-color: #F8B894;
+  border: #E5E5E5;
+  margin-left: 5px;
+}
+
+
+.profile-container {
+    display: flex;
+    align-items: center;
+}
+
+
+
+.textarea-container {
+    display: flex; /* Torna os elementos filhos flexíveis */
+    align-items: center; /* Alinha os elementos verticalmente ao centro */
+}
+
+textarea {
+    flex: 1; /* Ocupa o espaço disponível restante na linha */
+    margin-right: 10px; /* Espaçamento à direita do textarea para separá-lo do botão */
+}

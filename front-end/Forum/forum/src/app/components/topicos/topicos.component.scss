@@ -1,0 +1,54 @@
+
+.card-container {
+    width: 95%;
+    margin: 0 auto; /* Centraliza horizontalmente */
+    margin-top: 20px;
+    font-size: 12px;
+  }
+
+.card {
+    background-color: #FDF1E9; /* Cor de fundo */
+    border: 2px solid #F8B894; /* Cor da borda */
+    border-radius: 10px; 
+    
+  }
+  .card p{
+    color: #6F6E72;
+    font-size: 20px;
+  }
+
+  .profile-card {
+    width:  95%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    margin-top: 30px;
+  }
+
+  label{
+     color: #F2722A;
+  }
+  li {
+    list-style-type: none;
+  }
+
+  .topicoTitulo{
+    text-align: center;
+    border: 2px solid #E5E5E5;
+    height: 40px;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    border-radius: 7px;
+    padding: 7px;
+  }
+
+  .topicoTitulo p{
+    color: rba(111,110,114);
+  }
+
