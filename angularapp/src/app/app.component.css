@@ -1,0 +1,39 @@
+.box {
+  background-color: #f2f2f2; /* Cor de fundo cinza claro */
+  padding: 20px; /* Espaçamento interno para o conteúdo */
+  border: 1px solid #ed8e19; /* Borda fina cinza */
+  border-radius: 5px; /* Borda arredondada */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  width: 700px; /* Largura do box (ajuste conforme necessário) */
+  margin: auto; /* Centralize horizontalmente */
+  text-align: center; /* Centralize o texto horizontalmente */
+}
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    .page{
+      margin-top: 1.5rem;
+    }
+    .feed-toggle {
+      margin-bottom: -1px
+    }
+}
+.nav {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+ol, ul, dl {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+.nav-pills .nav-item {
+    float: left;
+}
+.nav-pills::after {
+    content: "";
+    display: table;
+    clear: both;
+}

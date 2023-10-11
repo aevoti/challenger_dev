@@ -1,0 +1,41 @@
+<div *ngIf="topics">
+  <h2>Lista de Tópicos</h2>
+  <ul>
+    <li *ngFor="let topic of topics" (click)="onTopicClick(topic)">
+      <h3>{{ topic.title }}</h3>
+      <p>{{ topic.content }}</p>
+      <button (click)="deleteTopic(topic.id)">Excluir</button>
+      <button (click)="openEditTopicModal(topic)">Editar</button>
+    </li>
+  </ul>
+</div>
+
+<!-- Exibir Comentários quando um Tópico é Clicado -->
+<div *ngIf="selectedTopic">
+  <h2>Tópico Selecionado: {{ selectedTopic.title }}</h2>
+
+  <h3>Comentários</h3>
+  <ul>
+    <li *ngFor="let comment of selectedTopic.comments">
+      <p>{{ comment.content }}</p>
+      <button (click)="openCreateCommentModal()">Comentar</button>
+      <button (click)="deleteComment(selectedTopic.id, comment.id)">Excluir</button>
+    </li>
+  </ul>
+</div>
+
+<button (click)="openCreateTopicModal()">Criar Tópico</button>
+<app-create-topic-modal [isCreateTopicModalOpen]="isCreateTopicModalOpen"
+                        (create)="onTopicCreate($event)"
+                        (closeModal)="closeCreateTopicModal()"></app-create-topic-modal>
+
+
+<app-edit-topic-modal [isEditTopicModalOpen]="isEditTopicModalOpen"
+                      [selectedTopic]="selectedTopic"
+                      (updateTopic)="onTopicUpdate($event)"
+                      (closeModal)="closeEditTopicModal()"></app-edit-topic-modal>
+
+<app-create-comment-modal [isCreateCommentModalOpen]="isCreateCommentModalOpen"
+                          selectedTopicForComment="selectedTopic"
+                          (createComment)="createComment()"
+                          closeModal="closeCreateCommentModal()"></app-create-comment-modal>
