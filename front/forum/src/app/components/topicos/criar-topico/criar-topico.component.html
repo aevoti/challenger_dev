@@ -1,0 +1,15 @@
+
+<form>
+  <div class="criarTopico topo">
+    <div class="fotoUsuario">
+      <img src="../../../assets/images/flor.jpg" alt="AEVO" class="imagemUsuario">
+    </div>
+    <div class="textoTopico">
+      <label class="textoPrincipalNegrito">Digite aqui o que deseja compartilhar com a empresa:</label>
+      <textarea class="borderColor" placeholder="O que quero compartilhar agora?" id="topico" name="topico" [(ngModel)]="descricao"></textarea>
+      <div class="novoTopico padding-top">
+        <button class="buttonTopico" type="submit" (click)="criarTopico()"><i class="fa fa-wechat" aria-hidden="true"></i> Criar tópico</button>
+      </div>
+    </div>
+  </div>
+</form>

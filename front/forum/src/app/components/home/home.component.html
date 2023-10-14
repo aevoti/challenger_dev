@@ -1,0 +1,20 @@
+<header>
+  <div>
+    <img src="../../../assets/images/AEVO.png" alt="AEVO">
+  </div>
+</header>
+<body>
+  <div class="topo">
+    <div>
+      <h1>Fórum de discussão</h1>
+    </div>
+    <div class="pesquisa">
+      <input type="text" placeholder="Buscar um tópico" class="buscarTopico" #busca>
+      <button class="buttonPesquisa" (click)="buscarTopico(busca.value)"><i class="fa fa-search" aria-hidden="true"></i></button>
+    </div>
+  </div>
+  <h2 class="borderPrimaryColor">Este é um espaço onde você pode participar de discussões, trocar informações, fazer perguntas, compartilhar opiniões e interagir com outras pessoas que têm interesses semelhantes.</h2>
+  <div class="linhaSeparacao"></div>
+  <app-criar-topico></app-criar-topico>
+  <app-listar-topico></app-listar-topico>
+</body>

@@ -1,0 +1,73 @@
+
+<div class="novoTopico ordenacao padding-top">
+  <label class="secondaryColor label">Ordenar por </label>
+  <select #select (change)="mudarOrdenacao(select.value)" [(ngModel)]="ordenacao">
+    <option value="desc">Mais recentes</option>
+    <option value="cresc">Menos recentes</option>
+  </select>
+</div>
+<div class="blocosTopicos borderColor" *ngFor="let topico of topicos">
+  <div class="blocoTopico">
+    <div class="cabecalhoBlocoTopico">
+      <div>
+        <span class="spanTopico textColor">Tópico para discussão #{{topico.id}}</span>
+      </div>
+      <div class="botoes">
+        <div>
+          <button  class="buttonExcluir" (click)="excluirTopico(topico.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+        </div>
+        <div>
+          <button class="buttonEditar" (click)="abrirTopico(topico.id)"><i class="fa fa-edit" aria-hidden="true"></i></button>
+        </div>
+      </div>
+    </div>
+    <label class="labelTopico primaryColor"><i>Postado em <b>{{ topico.data | date:"dd/MM/yyyy" }}</b> por <b>{{topico.usuario.nome}}</b></i></label>
+    <p class="textColor pTopico">{{topico.descricao}}</p>
+    <div class="hidden" [id]="topico.id">
+      <textarea class="borderColor width" placeholder="O que quero compartilhar agora?" id="topicoTextArea" name="topicoTextArea" #topicoTextArea [(ngModel)]="topico.descricao"></textarea>
+      <br>
+      <button class="buttonTopico" type="submit" (click)="editarTopico(topicoTextArea.value, topico.id)">Salvar</button>
+    </div>
+  </div>
+  <div class="linhaSeparacao"></div>
+  <div class="blocoComentario" *ngFor="let comentario of topico.comentarios">
+    <div class="comentario">
+      <div class="cabecalhoComentario">
+        <div class="fotoUsuarioMini">
+          <img [src]="comentario.usuario.foto" alt="AEVO" class="imagemUsuario">
+        </div>
+        <div>
+          <label class="textColor labelNome"><b>{{comentario.usuario.nome}}</b></label>
+        </div>
+        <div class="botoes">
+          <div>
+            <button  class="buttonExcluir" (click)="excluirComentario(comentario.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+          </div>
+          <div>
+            <button class="buttonEditar" (click)="abrirComentario(comentario.id)"><i class="fa fa-edit" aria-hidden="true"></i></button>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="textColor pComentario">{{comentario.descricao}}</p>
+      </div>
+      <div class="hidden" [id]="('comentario')+comentario.id">
+        <textarea class="borderColor width" placeholder="O que quero compartilhar agora?" id="comentarioTextArea" name="comentarioTextArea" #comentarioTextArea [(ngModel)]="comentario.descricao"></textarea>
+        <br>
+        <button class="buttonTopico" type="submit" (click)="editarComentario(comentarioTextArea.value, comentario.id, topico.id)">Salvar</button>
+      </div>
+    </div>
+    <br>
+  </div>
+  <div class="comentar">
+    <div class="fotoUsuarioMini">
+      <img src="../../../assets/images/flor.jpg" alt="AEVO" class="imagemUsuario">
+    </div>
+    <div class="textComentar">
+      <input type="text" placeholder="Digite aqui seu comentario" id="comentario" name="comentario" #comentar>
+    </div>
+    <div class="novoTopico">
+      <button class="buttonTopico" type="submit" (click)="criarComentario(comentar.value, topico.id)">Comentar</button>
+    </div>
+  </div>
+</div>

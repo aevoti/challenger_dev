@@ -1,0 +1,120 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz@6..12&display=swap');
+
+.primaryColor {
+  color: #F2722A;
+}
+
+.secondaryColor{
+  color: #333137;
+}
+
+.textColor{
+  color: #6F6E72;
+}
+
+.borderColor{
+  border: 1px solid #E5E5E5;
+  border-radius: 5px;
+  padding-left: 10px;
+}
+
+.borderPrimaryColor{
+  border: 1px solid #F2722A;
+  border-radius: 15px;
+}
+
+header {
+  margin: 8px;
+}
+
+.topo{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.buttonTopico{
+  background-color: #F2722A;
+  color: white;
+  border-radius: 5px;
+  border: 5px solid #F2722A;
+  cursor: pointer;
+  height: 25px;
+}
+.textoPrincipalNegrito {
+  font-size: 14px;
+  color: #F2722A;
+  padding: 10px 0px;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.criarTopico {
+  padding: 15px;
+  box-shadow: #E5E5E9 3px 3px 5px;
+}
+
+.textoTopico{
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  height: 120px;
+}
+
+textarea {
+  resize: none;
+  height: 50px;
+  border-radius: 2px;
+}
+
+textarea:focus-visible {
+  outline: 1px solid #F2722A;
+}
+
+.fotoUsuario {
+  width: 40px;
+  height: 40px;
+}
+
+.fotoUsuarioMini {
+  width: 20px;
+  height: 20px;
+}
+
+.imagemUsuario{
+  border-radius: 100px;
+  width: 100%;
+  height: 100%;
+  vertical-align: top;
+  object-fit: cover;
+}
+
+.novoTopico {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.padding-top {
+  padding-top: 5px;
+}
+
+.linhaSeparacao{
+  margin-top: 35px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #E5E5E9;
+}
+
+.label{
+  margin-right: 4px;
+  font-size: 14px;
+}
+
+p, h1, h2, span, label, textarea {
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.hidden {
+  display: none;
+}

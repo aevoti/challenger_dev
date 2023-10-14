@@ -1,0 +1,108 @@
+.ordenacao {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.blocosTopicos{
+  padding: 15px;
+  margin-bottom: 24px;
+}
+
+.spanTopico {
+  border: 1px solid #E5E5E5;
+  border-radius: 5px;
+  font-size: 12px;
+  padding: 1px;
+}
+
+.labelTopico {
+  font-size: 12px;
+}
+
+.cabecalhoBlocoTopico {
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.botoes {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.pTopico{
+  font-size: 14px;
+}
+
+.cabecalhoComentario {
+  display: flex;
+  flex-direction: row;
+}
+
+.comentario {
+  background-color: rgba(229, 229, 229, 0.3);
+  padding: 15px;
+}
+
+.pComentario{
+  font-size: 12px;
+  padding-left: 25px;
+}
+
+.labelNome {
+  padding-left: 6px;
+  font-size: 12px;
+}
+
+.comentar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.textComentar {
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100%;
+}
+
+input {
+  width: 99%;
+  height: 20px;
+  border-radius: 15px;
+  border: 1px solid #E5E5E5;
+  padding-left: 10px;
+}
+
+input:focus-visible {
+  outline: 1px solid #F2722A;
+}
+
+.buttonEditar {
+  background-color: #F2722A;
+  color: white;
+  border-radius: 5px;
+  border: 2px solid #F2722A;
+  cursor: pointer;
+  height: 23px;
+  margin-left: 6px;
+}
+
+.buttonExcluir {
+  background-color: #6F6E72;
+  color: white;
+  border-radius: 5px;
+  border: 2px solid #6F6E72;
+  cursor: pointer;
+  height: 23px;
+  margin-left: 6px;
+}
+
+.width {
+  width: 98%;
+}
