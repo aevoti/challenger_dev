@@ -1,0 +1,41 @@
+<div class="modal-header">
+    <h1>Tópico para discussão #{{ topico.id }}</h1>
+    <div class="ml-auto">
+        <div ngbDropdown class="d-inline-block">
+            <i class="fa-solid fa-ellipsis-vertical dropdown-toggle" ngbDropdownToggle></i>
+            <div ngbDropdownMenu>
+                <button ngbDropdownItem (click)="editarTopico(topico)">Editar</button>
+                <button ngbDropdownItem (click)="excluirTopico(topico.id)">Deletar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-body">
+    <div class="topico">
+        <h4>Postado em <b>{{ topico.dataHoraPostagem | date:'dd/MM/yyyy' }}</b> por <b>{{ topico.usuarioNome }}</b></h4>
+        <p>{{ topico.conteudo }}</p>
+    </div>
+</div>
+<div class="modal-body">
+    <div class="comentario" *ngFor="let comentario of topico.comentarios; let i = index">
+        <div class="comentario d-flex justify-content-between">
+            <div>
+                <p>{{ comentario.usuarioNome }}</p>
+                <p>{{ comentario.conteudo }}</p>
+            </div>
+            <div ngbDropdown [open]="dropdownOpen[i]" class="d-inline-block">
+                <i class="fa-solid fa-ellipsis-vertical dropdown-toggle" ngbDropdownToggle></i>
+                <div ngbDropdownMenu>
+                    <button ngbDropdownItem
+                        (click)="editarComentario(comentario, topico.id, comentario.usuarioId)">Editar</button>
+                    <button ngbDropdownItem
+                        (click)="excluirComentario(comentario, topico.id, comentario.usuarioId)">Deletar</button>
+                </div>
+            </div>
+        </div>
+        <hr class="comentario-divisor">
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn ativo" (click)="activeModal.close('Close click')">Close</button>
+</div>

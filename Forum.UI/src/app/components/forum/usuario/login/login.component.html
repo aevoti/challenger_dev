@@ -1,0 +1,16 @@
+<div class="container formulario">
+    <h1>Login</h1>
+    <form (ngSubmit)="login()">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" [(ngModel)]="usuario.email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Senha</label>
+            <input type="password" class="form-control" id="password" [(ngModel)]="usuario.senha" name="password"
+                required>
+        </div>
+        <button type="submit" class="btn ativo my-3">Login</button>
+    </form>
+    <a href="/cadastrar">Clique aqui para se cadastrar</a>
+</div>

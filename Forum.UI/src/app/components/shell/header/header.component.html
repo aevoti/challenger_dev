@@ -1,0 +1,24 @@
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm bg-white border-bottom box-shadow" style="padding-left: 265px;">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img class="logo-aevo" src="../../assets/logo-aevo/logo_aevo.png" alt="Logo AEVO">
+            </a>
+        </div>
+
+        <div class="navbar">
+            <ul class="navbar-nav">
+                <ng-container *ngIf="!token; else loggedIn">
+                    <li class="nav-item" style="padding-right: 280px;">
+                        <a class="btn ativo" href="/login">Entrar</a>
+                    </li>
+                </ng-container>
+                <ng-template #loggedIn>
+                    <li class="nav-item" style="padding-right: 280px;">
+                        <a class="btn ativo" (click)="logout()">Sair</a>
+                    </li>
+                </ng-template>
+            </ul>
+        </div>
+    </nav>
+</header>

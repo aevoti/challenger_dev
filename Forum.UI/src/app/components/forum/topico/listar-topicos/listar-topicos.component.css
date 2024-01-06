@@ -1,0 +1,117 @@
+.comentario {
+    background-color: var(--color-aevo-texto-20);
+    padding: 10px;
+}
+
+.seta {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid var(--color-aevo-texto-20);
+    margin-bottom: 0px;
+    margin-left: 86px;
+}
+
+.card-divisor {
+    margin-right: -15px !important;
+    margin-left: -15px !important;
+}
+
+.comentario-divisor {
+    margin-right: -10px !important;
+    margin-left: -10px !important;
+}
+
+.link {
+    color: var(--color-aevo-texto);
+    font-family: 'Nunito Sans Bold', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+
+.custom-input {
+    max-width: none;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+
+input:focus {
+    box-shadow: 0 0 0 2px var(--color-borda);
+    border-color: var(--color-borda);
+}
+
+.search-input {
+    width: 400px !important;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.icon-search {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+}
+
+.icon-topico {
+    font-size: 20px;
+}
+
+.icon-topico:hover {
+    color: var(--color-primaria-aevo);
+    font-size: 20px;
+    transform: scale(1.2);
+}
+
+.icon-topico.marked {
+    color: var(--color-primaria-aevo);
+    font-size: 20px;
+    transform: scale(1.2);
+}
+
+.icon-topico:active {
+    color: var(--color-primaria-aevo);
+    font-size: 20px;
+    transform: scale(0.8);
+}
+
+.novoComentario{
+    display: flex;
+    align-items: center;
+}
+
+.novoComentarioInput{
+    width: 100%;
+    position: relative;
+    margin-right: 10px;
+}
+
+.caracteresRestantes{
+    position: absolute;
+    top: -25px;
+    right: 25px;
+}
+
+.usuario-nome {
+    font-family: 'Nunito Sans Bold', sans-serif !important;
+    font-weight: bold;
+}
+
+.usuario-foto-comentario {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.usuario-foto-novo-comentario {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}

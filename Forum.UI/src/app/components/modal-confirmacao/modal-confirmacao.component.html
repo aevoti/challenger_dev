@@ -1,0 +1,10 @@
+<div class="modal-header">
+    <h1 class="modal-title">Confirmação</h1>
+</div>
+<div class="modal-body">
+    <p>Tem certeza de que deseja {{ tipoAcao }} o {{ tipo }} com ID {{ id }}?</p>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn botaoCancelar" (click)="cancelarExclusao()">Cancelar</button>
+    <button type="button" class="btn botaoConfirmar" (click)="confirmarExclusao()">Confirmar</button>
+</div>

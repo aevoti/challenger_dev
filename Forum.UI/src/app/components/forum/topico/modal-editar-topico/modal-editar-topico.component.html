@@ -1,0 +1,14 @@
+<div class="modal-header">
+    <h1>Tópico para discussão #{{ topico.id }}</h1>
+</div>
+<div class="modal-body">
+    <textarea class="form-control mb-3 custom-input" rows="5" placeholder="Digite aqui seu comentário"
+        [(ngModel)]="conteudoEditavel" (input)="atualizarClasseBotao(conteudoEditavel)"></textarea>
+    <div class="mt-3 justify-content-end">
+        <button class="btn" [class.ativo]="botaoClasse === 'ativo'" [class.inativo]="botaoClasse === 'inativo'"
+            (click)="salvarEdicao()">Salvar</button>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn ativo" (click)="activeModal.close('Close click')">Close</button>
+</div>

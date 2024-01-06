@@ -1,0 +1,15 @@
+.custom-input {
+  max-width: none;
+  margin-right: 10px;
+}
+
+textarea:focus {
+  box-shadow: 0 0 0 2px var(--color-borda);
+  border-color: var(--color-borda);
+}
+
+.usuario-foto {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
